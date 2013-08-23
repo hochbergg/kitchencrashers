@@ -10,11 +10,12 @@ class Event(models.Model):
 	location = models.TextField()
 	description = models.TextField()
 	budget = models.IntegerField()
-	max_people = models.IntegerField(blank=True)
+	max_people = models.IntegerField(blank=True, null=True)
 	is_vegan = models.BooleanField()
 	is_kosher = models.BooleanField()
 	is_vegeterian = models.BooleanField()
-	organizer = models.ForeignKey("KitchenUser",related_name="orgainizing")
+	picture = models.ImageField(upload_to='event_pics', blank=True, null=True)
+	organizer = models.ForeignKey("KitchenUser",related_name="organizing")
 
 class EventParticipant(models.Model):
 	user = models.ForeignKey("KitchenUser",related_name="participating")
