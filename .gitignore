@@ -1,0 +1,5 @@
+.project
+.idea
+/kitchencrashers/*.pyc
+/kitchencrashers/main/*.pyc
+db
