@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h1>Pasta Primavera & Ice Cream</h1>
+			<h1>{{ event.name }}</h1>
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
@@ -20,36 +20,50 @@
 			</div>
 			<div class="col-lg-8">
 				<div class="row">
-					<div class="col-lg-2">
+					<div class="col-lg-2"> 
+					
+					{% if event.is_vegan %}
+					<img src="{% static 'vegan_icon.png' %}" height="25px" width="25px">
+					{% endif %}
+					{% if event.is_kosher %}
 					<img src="{% static 'kosher_icon.jpg' %}" height="25px" width="25px">
+					{% endif %}
+					{% if event.is_vegeterian %}
 					<img src="{% static 'vegetarian_icon.gif' %}" height="25px" width="25px">
+					{% endif %} 
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-4" style="color:green">1 cook</div>
-					<div class="col-lg-4" style="color:red"><b>no cleaners</b></div>
+					<div class="col-lg-4" style="color:red"><b>
+					{% if event.cooks == 0 %}No{% else %}{{event.cooks}}{% endif %} 
+					cook{{ event.cooks|pluralize }}
+					</b></div>
+					<div class="col-lg-4" style="color:green">
+					{% if event.cleaners == 0 %}No{% else %}{{event.cleaners}}{% endif %}
+					cleaner{{ event.cleaners|pluralize }}
+					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-lg-12">
-						Tomorrow, Sat Aug 24th, 20:00 at Steve's place, 1456 Baldwin Ave, New York City, New York
+						{{ event.date }} at {{ event.location }}
 					</div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-lg-8">
-						I got a new recipe for pasta primavera and I want to share it with the world. Already got the fresh tomatoes from the market. The couch looks like shit but its really comfortable.
+						{{ event.description }}
 					</div>
 				</div>
 				<hr>
 				<div class="row">
 					<div class="col-lg-2"><b>Total Budget:</b></div>
 					<div class="col-lg-3">
-						50$
+						{{ event.budget }}$
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-5" style="color:gray">If you join now cost per person is <b>25$</b></div>
+					<div class="col-lg-5" style="color:gray">If you join now cost per person is <b>{{ event.per_person }}$</b></div>
 					
 				</div>
 				<div class="row">
