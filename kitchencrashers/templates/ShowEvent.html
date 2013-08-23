@@ -7,6 +7,7 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	{% load staticfiles %}
 </head>
 <body>
 	<div class="container">
@@ -15,13 +16,13 @@
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
-				<img src="living_room.jpg" height="270px">
+				<img src="{% static 'living_room.jpg' %}" height="270px">
 			</div>
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col-lg-2">
-					<img src="vegetarian_icon.gif" height="25px" width="25px">
-					<img src="kosher_icon.jpg" height="25px" width="25px">
+					<img src="{% static 'kosher_icon.jpg' %}" height="25px" width="25px">
+					<img src="{% static 'vegetarian_icon.gif' %}" height="25px" width="25px">
 					</div>
 				</div>
 				<div class="row">
