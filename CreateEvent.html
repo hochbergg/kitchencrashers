@@ -1,0 +1,114 @@
+<html>
+<head>
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+	<!-- Button trigger modal -->
+	<a data-toggle="modal" href="#myModal" class="btn btn-primary btn-lg">Create
+		New Event</a>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title">New Event</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-4">What's cookin?</div>
+						<div class="col-lg-8">
+							<input type="text" size="36">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">Which side are you on?</div>
+						<div class="col-lg-1">
+							<button class="btn btn-primary">Cook</button>
+						</div>
+						<div class="col-lg-1 col-lg-offset-1">
+							<button class="btn">Clean</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">When and where?</div>
+						<div class="col-lg-1">
+							<img src="calendar_icon.png" width="25px" height="25px">
+						</div>
+						<div class="col-lg-4">
+							<input type="text" placeholder="my location">
+						</div>
+						<div class="col-lg-2">
+							<button class="btn">Current</button>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-lg-2">Category</div>
+						<div class="col-lg-3">
+							<select>
+								<option>Italian</option>
+								<option>Chinese</option>
+								<option>Sushi</option>
+								<option>BBQ</option>
+							</select>
+						</div>
+						<div class="col-lg-2 col-lg-offset-2">Budget</div>
+						<div class="col-lg-3">
+							<input type="number" name="quantity" min="10" max="1000">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">Special Needs</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<input type="checkbox"> Vegan
+						</div>
+						<div class="col-lg-3">
+							<input type="checkbox"> Kosher
+						</div>
+						<div class="col-lg-3">
+							<input type="checkbox"> Vegatarian
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-lg-3">
+							<div
+								style="background-color: gray; height: 143px; color: white; text-align: center; vertical-align: middle">Show
+								me what you got</div>
+						</div>
+						<div class="col-lg-9">
+							<div class="row">
+								<div class="col-lg-4">Anything else?</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<textarea rows="6" cols="41"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Let's Eat!</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+</html>
