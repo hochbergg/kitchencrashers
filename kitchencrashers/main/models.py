@@ -8,6 +8,7 @@ class Event(models.Model):
 	name = models.TextField()
 	date = models.DateTimeField()
 	location = models.TextField()
+	category = models.TextField()
 	description = models.TextField()
 	budget = models.IntegerField()
 	max_people = models.IntegerField(blank=True, null=True)
@@ -24,7 +25,7 @@ class EventParticipant(models.Model):
 
 class KitchenUser(models.Model):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL)
-	
+
 	def __str__(self):
 		return str(self.user.facebook_name)
 
