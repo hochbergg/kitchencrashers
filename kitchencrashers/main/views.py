@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from models import Event
 import models
 import django
+from django.contrib.auth.decorators import login_required
 from forms.event_form import EventForm
 from models import RsvpOptions
 
@@ -11,6 +12,9 @@ from models import RsvpOptions
 
 def home(request):
 	return render(request,"index.html")
+
+def login(request):
+    return render(request, "registration/login.html")
 
 def search(request):
 	return render(request,"search.html")
@@ -41,16 +45,16 @@ def saveEventToDB(event_form,request):
 
     return event.id
 
+@login_required()
 def createEvent(request):
     if (request.method == 'POST'):
         form = EventForm(request.POST, request.FILES)
         if (form.is_valid()):
             id = saveEventToDB(form, request)
-            redirect_page = "/showEvent/" + str(id)
-            return HttpResponseRedirect(redirect_page)
+            return HttpResponseRedirect("/showEvent/" + str(id))
     else:
         form = EventForm()
-    return render(request, "CreateEvent.html", {'form': form})
+        return render(request, "CreateEvent.html", {'form': form})
 
 def showEvent(request, eventID):
     event = Event.objects.get(pk=eventID)
