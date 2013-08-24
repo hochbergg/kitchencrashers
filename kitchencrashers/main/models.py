@@ -3,6 +3,19 @@ from django.db.models.signals import post_save
 from django_facebook.models import FacebookCustomUser
 from kitchencrashers import settings
 
+class RsvpOptions():
+    COOK = 'Cook'
+    CLEANER = 'Cleaner'
+    RSVP_OPTIONS = ((1,COOK,), (2,CLEANER,))
+
+    def get_rsvp_by_id(self, id):
+        for option in self.RSVP_OPTIONS:
+            if (option[0] == id):
+                return option[1]
+        return -1
+
+
+
 # Create your models here.
 class Event(models.Model):
 	name = models.TextField()

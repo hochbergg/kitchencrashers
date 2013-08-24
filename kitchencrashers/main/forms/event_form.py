@@ -1,5 +1,5 @@
 import floppyforms as forms
-
+from kitchencrashers.main.models import RsvpOptions
 
 class EventForm(forms.Form):
 
@@ -13,4 +13,5 @@ class EventForm(forms.Form):
     is_vegan = forms.BooleanField(required=False)
     is_kosher = forms.BooleanField(required=False)
     is_vegeterian = forms.BooleanField(required=False)
+    rsvp = forms.ChoiceField(widget=forms.RadioSelect, choices=RsvpOptions().RSVP_OPTIONS)
     picture = forms.ImageField()
