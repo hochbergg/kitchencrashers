@@ -27,7 +27,7 @@ def saveEventToDB(event_form):
     event.max_people = event_form.cleaned_data['max_people']
     event.name = event_form.cleaned_data['name']
     
-    event.organizer_id = 2
+    event.organizer_id = 2 #shouldnt be hardcoded
     event.save()
     return event.id
 
