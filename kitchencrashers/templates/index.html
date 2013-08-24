@@ -93,6 +93,7 @@
 		</div>
 		<hr>
 		<div class="row">
+			{% for event in events %}
 			<div class="col-md-4">
 				<div id="outer-container"
 					style="width: 88%; padding-top: 28%; position: relative">
@@ -114,12 +115,12 @@
 							style="top: 20%; left: 30%; width: 4.5%; height: 60%" id="">
 							
 						<span class="on-ticket-element"
-							style="top: 21%; left: 40%; font-size: 11px; font-weight: bold;">FEB.</span>
+							style="top: 21%; left: 40%; font-size: 11px; font-weight: bold;">{{event.date|date:"b"|upper}}.</span>
 						<span class="on-ticket-element"
-							style="top: 24%; left: 36%; font-size: 44px;">21</span>
+							style="top: 24%; left: 36%; font-size: 44px;">{{event.date|date:"d"}}</span>
 						<span
 							class="on-ticket-element"
-							style="top: 68%; left: 37%; font-size: 11px;">Tel Aviv</span>
+							style="top: 68%; left: 37%; font-size: 11px;" title="{{event.location}}">{{event.location|truncatechars:8}}</span>
 						
 						
 						<span
@@ -131,19 +132,21 @@
 							style="background-color: gray; top: 58%; left: 52.5%; height: 0.6%; width: 42%;"></span>
 
 						<span class="on-ticket-element"
-							style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">Hummus
-							Coliformi lunch </span> 
+							style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">{{event.name}}</span> 
 						<span class="on-ticket-element"
-							style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;">Saturday
-							at 11:00 </span> 
+							style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;"> {{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> 
+						
+						
 						<img src="{% static 'hat_on_ticket.png' %}"
 							class="on-ticket-element" style="top: 66%; left: 56.5%; width: 4%;">
 						<span class="on-ticket-element"
-							style="top: 64%; left: 61.5%; font-size: 14px">3</span> <img
+							style="top: 64%; left: 61.5%; font-size: 14px">{{event.num_cooks}}</span> 
+						
+						<img
 							src="{% static 'bubbles_on_ticket.png' %}"
 							class="on-ticket-element" style="top: 65%; left: 68.5%; width: 4%;">
 						<span class="on-ticket-element"
-							style="top: 64%; left: 74%; font-size: 14px">2</span>
+							style="top: 64%; left: 74%; font-size: 14px">{{event.num_cleaners}}</span>
 						<img
 							src="{% static 'map_icon.png' %}" class="on-ticket-element"
 							style="top: 65%; left: 80%; width: 3%; height: 12%;"> 
@@ -154,8 +157,16 @@
 					</div>
 				</div>
 			</div>
+			{% if forloop.counter|divisibleby:"3" %}
+			</div>
+			<div class="clearfix visible-md"></div>
+			<hr style="margin-top:3%">
+			<div class="row">
+			{% endif %}
+			{% endfor %}
 		</div>
 	</div>
+	<hr style="margin-top:25px;">
 	<form action="{% url 'facebook_connect' %}?facebook_login=1
 		"
 		method="post">

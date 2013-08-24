@@ -2,3 +2,8 @@
 .pydevproject
 db
 *.pyc
+.idea
+/kitchencrashers/*.pyc
+/kitchencrashers/main/*.pyc
+/kitchencrashers/media/*
+db

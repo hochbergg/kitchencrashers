@@ -11,11 +11,8 @@ CLEANER = 'Cleaner'
 
 
 def home(request):
-<<<<<<< HEAD
-	event = Event.objects.get(pk=1)
-	return render(request,"index.html",{'event':event})
-=======
-    return render(request, "index.html")
+	events = Event.objects.all()
+	return render(request,"index.html",{'events':events})
 
 def saveEventToDB(event_form):
     event = Event()
@@ -34,7 +31,7 @@ def saveEventToDB(event_form):
     event.organizer_id = 2 #shouldnt be hardcoded
     event.save()
     return event.id
->>>>>>> b4e6fc04c65d95fbb0a14f1522bb3131a5786d13
+
 
 def createEvent(request):
     if (request.method == 'POST'):

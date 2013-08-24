@@ -3,6 +3,9 @@ from django.db.models.signals import post_save
 from django_facebook.models import FacebookCustomUser
 from kitchencrashers import settings
 
+COOK = 'Cook'
+CLEANER = 'Cleaner'
+
 # Create your models here.
 class Event(models.Model):
 	name = models.TextField()
@@ -17,6 +20,14 @@ class Event(models.Model):
 	is_vegeterian = models.BooleanField()
 	picture = models.ImageField(upload_to='event_pics', blank=True, null=True)
 	organizer = models.ForeignKey("KitchenUser",related_name="organizing")
+	
+	def get_num_cooks(self):
+		return self.participants.filter(rsvp = COOK).count()
+	num_cooks = property(get_num_cooks)
+	
+	def get_num_cleaners(self):
+		return self.participants.filter(rsvp = CLEANER).count()
+	num_cleaners = property(get_num_cleaners)
 
 class EventParticipant(models.Model):
 	user = models.ForeignKey("KitchenUser",related_name="participating")
