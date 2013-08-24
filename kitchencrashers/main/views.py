@@ -10,7 +10,10 @@ from models import RsvpOptions
 
 
 def home(request):
-    return render(request, "index.html")
+	return render(request,"index.html")
+
+def search(request):
+	return render(request,"search.html")
 
 def saveEventToDB(event_form,request):
     event = Event()
