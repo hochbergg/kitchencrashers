@@ -33,7 +33,7 @@ def saveEventToDB(event_form):
 
 def createEvent(request):
     if (request.method == 'POST'):
-        form = EventForm(request.POST)
+        form = EventForm(request.POST, request.FILES)
         if (form.is_valid()):
             saveEventToDB(form)
             redirect_page = "/showEvent/" + str(id) + "/"

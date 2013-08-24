@@ -2,13 +2,6 @@ import floppyforms as forms
 
 
 class EventForm(forms.Form):
-    """
-    This is a form
-    """
-
-    # def __init__(self, *args, **kwargs):
-    #     super(EventForm, self).__init__(*args, **kwargs)
-    #     self.fields['date'].widget.attrs['class'] = 'datepicker'
 
     name = forms.CharField()
     date = forms.DateTimeField(widget=forms.SplitDateTimeWidget)
@@ -20,4 +13,4 @@ class EventForm(forms.Form):
     is_vegan = forms.BooleanField(required=False)
     is_kosher = forms.BooleanField(required=False)
     is_vegeterian = forms.BooleanField(required=False)
-    picture = forms.ImageField(required=False)
+    picture = forms.ImageField()
