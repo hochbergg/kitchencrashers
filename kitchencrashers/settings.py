@@ -127,6 +127,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'kitchencrashers.main',
+    'datetimewidget',
+    'floppyforms',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

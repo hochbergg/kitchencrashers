@@ -1,5 +1,5 @@
-from django import forms
-from django.contrib.admin import widgets
+import floppyforms as forms
+
 
 class EventForm(forms.Form):
     """
@@ -11,7 +11,7 @@ class EventForm(forms.Form):
     #     self.fields['date'].widget.attrs['class'] = 'datepicker'
 
     name = forms.CharField()
-    date = forms.DateTimeField()
+    date = forms.DateTimeField(widget=forms.SplitDateTimeWidget)
     location = forms.CharField()
     category = forms.CharField()
     description = forms.CharField()
