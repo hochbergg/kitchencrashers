@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	{% load staticfiles %}
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1>{{ event.name }}</h1>
+            <h4>{{ event.category }}</h4>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<img src="{{ event.picture.url }}" height="270px">
+			</div>
+			<div class="col-lg-8">
+				<div class="row">
+					<div class="col-lg-2"> 
+					
+					{% if event.is_vegan %}
+					<img src="{% static 'vegan_icon.png' %}" height="25px" width="25px">
+					{% endif %}
+					{% if event.is_kosher %}
+					<img src="{% static 'kosher_icon.jpg' %}" height="25px" width="25px">
+					{% endif %}
+					{% if event.is_vegeterian %}
+					<img src="{% static 'vegetarian_icon.gif' %}" height="25px" width="25px">
+					{% endif %} 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4" style="color:red"><b>
+					{% if event.cooks == 0 %}No{% else %}{{event.cooks}}{% endif %} 
+					cook{{ event.cooks|pluralize }}
+					</b></div>
+					<div class="col-lg-4" style="color:green">
+					{% if event.cleaners == 0 %}No{% else %}{{event.cleaners}}{% endif %}
+					cleaner{{ event.cleaners|pluralize }}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						{{ event.date }} at {{ event.location }}
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-lg-8">
+						{{ event.description }}
+					</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-lg-2"><b>Total Budget:</b></div>
+					<div class="col-lg-3">
+						{{ event.budget }}$
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-5" style="color:gray">If you join now cost per person is <b>{{ event.per_person }}$</b></div>
+					
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-lg-offset-8"> <button class="btn btn-danger">CRASH THAT KITCHEN</button></div>
+				</div>
+			</div>
+		</div>
+		<div class ="row">
+			<div class="col-lg-12"><h2>Comments & Updates</h2></div>
+		</div>
+	</div>
+</body>
+</html>
