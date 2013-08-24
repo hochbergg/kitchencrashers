@@ -3,7 +3,9 @@
 db
 *.pyc
 .idea
+*.pyc
 /kitchencrashers/*.pyc
 /kitchencrashers/main/*.pyc
+/kitchencrashers/main/forms/*.pyc
 /kitchencrashers/media/*
 db
