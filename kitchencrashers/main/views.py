@@ -11,7 +11,8 @@ from models import RsvpOptions
 
 
 def home(request):
-	return render(request,"index.html")
+	events = Event.objects.all()
+	return render(request,"index.html",{'events':events})
 
 def login(request):
     return render(request, "registration/login.html")
