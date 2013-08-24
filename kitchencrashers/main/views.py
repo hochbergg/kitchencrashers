@@ -6,7 +6,8 @@ COOK = 'Cook'
 CLEANER = 'Cleaner'
 
 def home(request):
-	return render(request,"index.html")
+	event = Event.objects.get(pk=1)
+	return render(request,"index.html",{'event':event})
 
 def createEvent(request):
 	return render(request,"CreateEvent.html")

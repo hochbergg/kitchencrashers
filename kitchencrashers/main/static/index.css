@@ -1,0 +1,80 @@
+#the-navbar
+{
+	height:10%;
+	background-color:black;
+}
+
+.navbar-brand img
+{
+	height:70%;
+}
+
+#navbar-brand-text
+{
+	color:white;
+	padding-left:5px;
+	font-size:23px;
+	font-weight: bold;
+}
+
+#navbar-search-div
+{
+	position:relative;
+}
+
+#navbar-search-box
+{
+	position:relative;
+	vertical-align: middle;
+}
+
+.main-page-logo
+{
+	width:100%;
+	text-align: center;
+}
+
+#crash-kitchen-text-row
+{
+	margin-top:13px;
+}
+
+#crash-kitchen-text
+{
+	font-size:25px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#filter-question-row
+{
+	margin-top:30px;
+}
+
+
+.filter-question
+{
+	font-size:16px;
+	font-weight: bold;
+	text-align:center;
+	letter-spacing: 2px;
+}
+
+.filter-question select
+{
+	border-radius:1em;
+	color:gray;
+	
+}
+
+#get-ticket-logo-line
+{
+	margin-top:25px;
+}
+
+.on-ticket-element
+{
+	display: block; 
+	position:absolute; 
+	z-index: 1;
+}
