@@ -1,4 +1,12 @@
 .project
+<<<<<<< HEAD
 .pydevproject
 db
 *.pyc
+=======
+.idea
+/kitchencrashers/*.pyc
+/kitchencrashers/main/*.pyc
+/kitchencrashers/media/*
+db
+>>>>>>> b4e6fc04c65d95fbb0a14f1522bb3131a5786d13
