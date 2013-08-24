@@ -23,6 +23,7 @@ def saveEventToDB(event_form,request):
     event.is_vegeterian = event_form.cleaned_data['is_vegeterian']
     event.picture = event_form.cleaned_data['picture']
     event.location = event_form.cleaned_data['location']
+    event.city = event_form.cleaned_data['city']
     event.max_people = event_form.cleaned_data['max_people']
     event.name = event_form.cleaned_data['name']
 

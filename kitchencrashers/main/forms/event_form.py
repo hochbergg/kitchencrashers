@@ -6,6 +6,7 @@ class EventForm(forms.Form):
     name = forms.CharField()
     date = forms.DateTimeField(widget=forms.SplitDateTimeWidget)
     location = forms.CharField()
+    city = forms.CharField()
     category = forms.CharField()
     description = forms.CharField()
     budget = forms.IntegerField()
