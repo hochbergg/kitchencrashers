@@ -11,7 +11,8 @@
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="{% static 'index.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
 </head>
 <body>
 	{% include 'django_facebook/_facebook_js.html' %}
@@ -38,6 +39,22 @@
 		<!-- /.navbar-collapse -->
 	</nav>
 	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<form action="{% url 'facebook_connect' %}?facebook_login=1
+		"
+					method="post">
+					<a href="javascript:void(0);" style="font-size: 20px;"
+						onclick="F.connect(this.parentNode);"> <img
+						src="{% static 'connect_with_facebook.jpg' %}"
+						style="position: relative; left: 37.5%; height: 5%; width: 15%"></a>
+					<input type="hidden" value="{{ request.path }}" name="next" /> <input
+						type="hidden" value="{{ request.path }}" name="register_next" />
+					<input type="hidden" value="{{ request.path }}" name="error_next" />
+					{% csrf_token %}
+				</form>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-1 col-md-offset-5" align="middle">
 				<img src="{% static 'crash_kitchen_logo.png' %}"
@@ -94,11 +111,15 @@
 		<hr>
 		<div class="row">
 			{% for event in events %}
-			<div class="col-md-4">
+			<div class="col-md-4" align="center">
+				<div id="title-container"
+					style="font-size: 25px; line-height: 2; text-decoration: underline; ">
+					{{event.name}}
+				</div>
 				<div id="outer-container"
 					style="width: 88%; padding-top: 28%; position: relative">
 					<div id="container"
-						style="width: 100%; display: block; position: absolute; top: -3%; bottom: -25%; right: 0%; left: 20%">
+						style="width: 100%; display: block; position: absolute; top: -3%; bottom: -25%; right: 0%; left: 0%">
 						<img src="{% static 'ticket_frame.png' %}"
 							style="display: block; width: 100%; height: 100%; z-index: 0; position: absolute;" />
 						<img src="{% static 'kitchen.jpg' %}" class="on-ticket-element"
@@ -107,24 +128,22 @@
 							class="on-ticket-element"
 							style="top: 69%; left: 8%; width: 3.5%; height: 8%" id="">
 						<span class="on-ticket-element"
-							style="top: 69%; left: 12%; font-size: 11px">{{event.organizer.user.get_short_name}}</span> 
-						
-						<img
-							src="{% static 'ticket_vertical.png' %}"
+							style="top: 69%; left: 12%; font-size: 11px">{{event.organizer.user.get_short_name}}</span>
+
+						<img src="{% static 'ticket_vertical.png' %}"
 							class="on-ticket-element"
 							style="top: 20%; left: 30%; width: 4.5%; height: 60%" id="">
-							
+
 						<span class="on-ticket-element"
 							style="top: 21%; left: 40%; font-size: 11px; font-weight: bold;">{{event.date|date:"b"|upper}}.</span>
 						<span class="on-ticket-element"
 							style="top: 24%; left: 36%; font-size: 44px;">{{event.date|date:"d"}}</span>
-						<span
-							class="on-ticket-element"
-							style="top: 68%; left: 37%; font-size: 11px;" title="{{event.location}}">{{event.location|truncatechars:8}}</span>
-						
-						
-						<span
-							class="on-ticket-element"
+						<span class="on-ticket-element"
+							style="top: 68%; left: 37%; font-size: 11px;"
+							title="{{event.location}}, {{event.city}}">{{event.city|truncatechars:"8"}}</span>
+
+
+						<span class="on-ticket-element"
 							style="background-color: gray; top: 20%; left: 52.5%; height: 61%; width: 0.4%;"></span>
 						<span class="on-ticket-element"
 							style="background-color: gray; top: 40%; left: 52.5%; height: 0.6%; width: 42%;"></span>
@@ -132,25 +151,22 @@
 							style="background-color: gray; top: 58%; left: 52.5%; height: 0.6%; width: 42%;"></span>
 
 						<span class="on-ticket-element"
-							style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">{{event.name}}</span> 
+							style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">{{event.name}}</span>
 						<span class="on-ticket-element"
-							style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;"> {{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> 
-						
-						
-						<img src="{% static 'hat_on_ticket.png' %}"
-							class="on-ticket-element" style="top: 66%; left: 56.5%; width: 4%;">
-						<span class="on-ticket-element"
-							style="top: 64%; left: 61.5%; font-size: 14px">{{event.num_cooks}}</span> 
-						
-						<img
-							src="{% static 'bubbles_on_ticket.png' %}"
-							class="on-ticket-element" style="top: 65%; left: 68.5%; width: 4%;">
-						<span class="on-ticket-element"
+							style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;">
+							{{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> <img
+							src="{% static 'hat_on_ticket.png' %}" class="on-ticket-element"
+							style="top: 66%; left: 56.5%; width: 4%;"> <span
+							class="on-ticket-element"
+							style="top: 64%; left: 61.5%; font-size: 14px">{{event.num_cooks}}</span>
+
+						<img src="{% static 'bubbles_on_ticket.png' %}"
+							class="on-ticket-element"
+							style="top: 65%; left: 68.5%; width: 4%;"> <span
+							class="on-ticket-element"
 							style="top: 64%; left: 74%; font-size: 14px">{{event.num_cleaners}}</span>
-						<img
-							src="{% static 'map_icon.png' %}" class="on-ticket-element"
-							style="top: 65%; left: 80%; width: 3%; height: 12%;"> 
-						<img
+						<img src="{% static 'map_icon.png' %}" class="on-ticket-element"
+							style="top: 65%; left: 80%; width: 3%; height: 12%;"> <img
 							src="{% static 'clock_on_ticket.png' %}"
 							class="on-ticket-element"
 							style="top: 66%; left: 86%; width: 5%; height: 11%;">
@@ -158,24 +174,12 @@
 				</div>
 			</div>
 			{% if forloop.counter|divisibleby:"3" %}
-			</div>
-			<div class="clearfix visible-md"></div>
-			<hr style="margin-top:3%">
-			<div class="row">
-			{% endif %}
-			{% endfor %}
 		</div>
+		<div class="clearfix visible-md"></div>
+		<hr style="margin-top: 3%">
+		<div class="row">{% endif %} {% endfor %}</div>
 	</div>
-	<hr style="margin-top:25px;">
-	<form action="{% url 'facebook_connect' %}?facebook_login=1
-		"
-		method="post">
-		<a href="javascript:void(0);" style="font-size: 20px;"
-			onclick="F.connect(this.parentNode);">Register, login or connect
-			with facebook</a> <input type="hidden" value="{{ request.path }}"
-			name="next" /> <input type="hidden" value="{{ request.path }}"
-			name="register_next" /> <input type="hidden"
-			value="{{ request.path }}" name="error_next" /> {% csrf_token %}
-	</form>
+	<hr style="margin-top: 25px;">
+
 </body>
 </html>

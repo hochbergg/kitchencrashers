@@ -1,33 +1,3 @@
-#the-navbar
-{
-	height:10%;
-	background-color:black;
-}
-
-.navbar-brand img
-{
-	height:70%;
-}
-
-#navbar-brand-text
-{
-	color:white;
-	padding-left:5px;
-	font-size:23px;
-	font-weight: bold;
-}
-
-#navbar-search-div
-{
-	position:relative;
-}
-
-#navbar-search-box
-{
-	position:relative;
-	vertical-align: middle;
-}
-
 .main-page-logo
 {
 	width:100%;
@@ -77,4 +47,9 @@
 	display: block; 
 	position:absolute; 
 	z-index: 1;
+}
+
+.event-title-row
+{
+	height:20px;
 }
