@@ -17,27 +17,7 @@
 <body>
 	{% include 'django_facebook/_facebook_js.html' %}
 
-	<nav class="navbar navbar-default" role="navigation" id="the-navbar">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#"> <img
-				src="{% static 'kitchen_crashers_logo.png' %}"> <span
-				id="navbar-brand-text">KITCHEN CRASHERS</span>
-			</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-
-			<form class="navbar-form navbar-right" role="search">
-				<div class="form-group">
-					<input type="text" id="navbar-search-box" class="form-control"
-						placeholder="Search">
-				</div>
-			</form>
-		</div>
-		<!-- /.navbar-collapse -->
-	</nav>
+	{% include '_header.html' %}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
