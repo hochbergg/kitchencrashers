@@ -1,0 +1,18 @@
+#event-main-picture
+{
+	width:200px;
+	height:200px;
+}
+
+#num-of-cooks
+{
+	top: 22%;
+	left: 17%;
+	
+}
+
+.small-not-highlighted-text
+{
+	font-size:20px;
+	font-decoration:bold;
+}
