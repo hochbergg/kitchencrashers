@@ -11,8 +11,9 @@ from models import RsvpOptions
 
 
 def home(request):
-	events = Event.objects.all()
-	return render(request,"index.html",{'events':events})
+    events = Event.objects.all()
+    form = EventForm()
+    return render(request,"index.html",{'events':events, 'form':form})
 
 def login(request):
     return render(request, "registration/login.html")
@@ -50,6 +51,9 @@ def saveEventToDB(event_form,request):
 def createEvent(request):
     if (request.method == 'POST'):
         form = EventForm(request.POST, request.FILES)
+        print '******************************'
+        print form.is_valid()
+        print '******************************'
         if (form.is_valid()):
             id = saveEventToDB(form, request)
             return HttpResponseRedirect("/showEvent/" + str(id))
