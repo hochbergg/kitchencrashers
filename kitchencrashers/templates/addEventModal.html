@@ -16,13 +16,44 @@
 
 						<div class="row">
 							<div class="col-xs-6" id="event-basic-info">
-								<label for="rsvp">who are you?</label>
-								{{ form.rsvp }}
+								<div class="row">
+									who are you?
+								</div>
+								<div class="row">
+<!-- 									<ul>
+										{% for choice in form.rsvp.field.choices %}
+										<li>
+											<input type="radio" name="rsvp" required value="{{choice.0}}"
+										      {% ifequal form.rsvp.data choice.0 %} 
+										         checked="checked"
+										      {% endifequal %}/>									
+											<label for="">{{choice.1}}</label>
+										</li>
+										{% endfor %}
+									</ul> -->
+									<div class="col-xs-6">
+										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.0.0}}" id="rsvp-cook">
+										<label for="rsvp-cook">
+											<img src="{% static 'hat_on_ticket.png' %}" class="role-icon">
+											<br>
+											{{form.rsvp.field.choices.0.1}}
+										</label>
+									</div>
+									<div class="col-xs-6">
+										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.1.0}}" id="rsvp-cleaner">
+										<label for="rsvp-cleaner">
+											<img src="{% static 'bubbles_on_ticket.png' %}" class="role-icon">
+											<br>
+											{{form.rsvp.field.choices.1.1}}
+										</label>
+									</div>
+								</div>
+								<br>
 
-								<label for="category">category:</label>
+								<label for="id_category">category:</label>
 								{{ form.category }}
 
-								<label for="name">what's cooking?</label>
+								<label for="id_name">what's cooking?</label>
 								{{ form.name }}
 
 								<p>when and where?</p>
