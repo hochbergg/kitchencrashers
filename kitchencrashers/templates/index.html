@@ -105,8 +105,20 @@
 								<label for="name">what's cooking?</label>
 								{{ form.name }}
 
-								<label for="date">when and where?</label>
-								{{ form.date }}								
+								<p>when and where?</p>
+								<label for="id_date">when?</label>
+								{{ form.date }}
+								<br>
+								<label for="id_location">where?</label>
+								{{ form.location }}							
+								<label for="id_city"></label>
+								{{ form.city }}
+
+								<p>gimme some numbers</p>
+								<label for="id_budget">budget:</label>
+								{{ form.budget }}
+								<label for="id_max_people">maximum crashing party:</label>
+								{{ form.max_people }}
 							</div>
 
 							<div class="col-xs-6" id="event-specifications">
@@ -115,17 +127,32 @@
 								<div class="row">
 									<div class="col-xs-6">
 										{{ form.is_vegeterian }}
-										<label for="is_vegetarian">vegetarian</label>
+										<label for="id_is_vegetarian">
+											<img src="{% static 'veg_icon.png' %}"
+											class="specification-icon">
+											<br>
+											vegetarian
+										</label>
 									</div>
 									<div class="col-xs-6">
 										{{ form.is_vegan }}
-										<label for="is_vegan">vegan</label>
+										<label for="id_is_vegan">
+											<img src="{% static 'vegan_icon.png' %}"
+											class="specification-icon">
+											<br>
+											vegan
+										</label>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-6">
 										{{ form.is_kosher }}
-										<label for="is_kosher">kosher</label>
+										<label for="is_kosher">
+											<img src="{% static 'kosher_icon.png' %}"
+											class="specification-icon">
+											<br>
+											kosher
+										</label>
 									</div>
 								</div>
 							</div>
@@ -166,13 +193,8 @@
 						style="width: 100%; display: block; position: absolute; top: -3%; bottom: -25%; right: 0%; left: 0%">
 						<img src="{% static 'ticket_frame.png' %}"
 							style="display: block; width: 100%; height: 100%; z-index: 0; position: absolute;" />
-						{% if event.picture %}
 						<img src="{{event.picture.url}}" class="on-ticket-element"
 							style="top: 23%; left: 8%; width: 18%; height: 40%" id="">
-						{% else %}
-						<img src="{% static 'kitchen_crashers_logo.png' %}" class="on-ticket-element"
-							style="top: 23%; left: 8%; width: 18%; height: 40%" id="">
-						{% endif %}
 						<img src="{{event.organizer.user.picture.url}}"
 							id="user-picture"
 							class="on-ticket-element"

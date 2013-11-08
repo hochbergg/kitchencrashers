@@ -88,8 +88,18 @@
 	border-right: 1px dashed black;
 }
 
-#event-specifications {
+#event-specifications label {
+	cursor: pointer;
+	cursor: hand;
+	text-align: center;
+}
 
+#event-specifications input {
+	display: none;
+}
+
+#event-specifications .row {
+	padding: 15px;
 }
 
 #event-description {
@@ -99,4 +109,6 @@
 
 .specification-icon {
 	height: 50px;
+	cursor: pointer;
+	cursor: hand;
 }
