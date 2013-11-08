@@ -15,22 +15,9 @@
 						{% csrf_token %}
 
 						<div class="row">
-							<div class="col-xs-6" id="event-basic-info">
+							<div class="col-xs-6" id="event-personal-info">
+								<p>who are you?</p>
 								<div class="row">
-									who are you?
-								</div>
-								<div class="row">
-<!-- 									<ul>
-										{% for choice in form.rsvp.field.choices %}
-										<li>
-											<input type="radio" name="rsvp" required value="{{choice.0}}"
-										      {% ifequal form.rsvp.data choice.0 %} 
-										         checked="checked"
-										      {% endifequal %}/>									
-											<label for="">{{choice.1}}</label>
-										</li>
-										{% endfor %}
-									</ul> -->
 									<div class="col-xs-6">
 										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.0.0}}" id="rsvp-cook">
 										<label for="rsvp-cook">
@@ -49,73 +36,50 @@
 									</div>
 								</div>
 								<br>
-
-								<label for="id_category">category:</label>
-								{{ form.category }}
-
-								<label for="id_name">what's cooking?</label>
-								{{ form.name }}
-
-								<p>when and where?</p>
-								<label for="id_date">when?</label>
-								{{ form.date }}
-								<br>
-								<label for="id_location">where?</label>
-								{{ form.location }}							
-								<label for="id_city"></label>
-								{{ form.city }}
-
-								<p>gimme some numbers</p>
-								<label for="id_budget">budget:</label>
-								{{ form.budget }}
-								<label for="id_max_people">maximum crashing party:</label>
-								{{ form.max_people }}
-							</div>
-
-							<div class="col-xs-6" id="event-specifications">
-								any specification?
-
-								<div class="row">
-									<div class="col-xs-6">
-										{{ form.is_vegeterian }}
-										<label for="id_is_vegetarian">
-											<img src="{% static 'veg_icon.png' %}"
-											class="specification-icon">
-											<br>
-											vegetarian
-										</label>
-									</div>
-									<div class="col-xs-6">
-										{{ form.is_vegan }}
-										<label for="id_is_vegan">
-											<img src="{% static 'vegan_icon.png' %}"
-											class="specification-icon">
-											<br>
-											vegan
-										</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-6">
-										{{ form.is_kosher }}
-										<label for="is_kosher">
-											<img src="{% static 'kosher_icon.png' %}"
-											class="specification-icon">
-											<br>
-											kosher
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row" id="event-description">
-							<div class="col-xs-4">
 								<label for="picture">add pictures of your kitchen or a meal you made</label>
 								{{ form.picture }}
 							</div>
-							<div class="col-xs-8">
-								<label for="description">describe this event: what are you going to prepare? what will be the atmosphere?</label>
+
+							<div class="col-xs-6" id="event-details">
+								what's cooking?
+								{{ form.name }}
+								{{ form.category }}
 								{{ form.description }}
+
+								<p>when and where?</p>
+								{{ form.date }}
+								{{ form.location }}							
+								{{ form.city }}
+
+								<p>gimme some numbers</p>
+								{{ form.budget }}
+								{{ form.max_people }}
+							</div>
+						</div>
+						<div class="row" id="event-specifications">
+							<div class="col-xs-4">
+								Tags:
+							</div>
+							<div class="col-xs-2">
+								{{ form.is_vegeterian }}
+								<label for="id_is_vegetarian">
+									<img src="{% static 'veg_icon.png' %}"
+											class="specification-icon">						
+									<br>vegetarian</label>
+							</div>
+							<div class="col-xs-2">
+								{{ form.is_vegan }}
+								<label for="id_is_vegan">
+									<img src="{% static 'vegan_icon.png' %}"
+											class="specification-icon">						
+									<br>vegan</label>
+							</div>
+							<div class="col-xs-2">
+								{{ form.is_kosher }}
+								<label for="is_kosher">
+									<img src="{% static 'kosher_icon.png' %}"
+											class="specification-icon">						
+									<br>kosher</label>
 							</div>
 						</div>
 					</div>

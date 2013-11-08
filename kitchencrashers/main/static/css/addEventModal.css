@@ -30,24 +30,53 @@
 
 .modal-body {
 	padding: 30px;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
-#event-basic-info {
-	border-right: 1px dashed black;
+.modal-footer {
+	margin-top: 0; 
 }
 
-#event-basic-info label {
+#event-personal-info {
+	/*border-right: 1px dashed black;*/
+}
+
+#event-personal-info label {
 	cursor: pointer;
 	cursor: hand;
 	text-align: center;
 }
 
-#event-basic-info input[type=radio] {
+#event-personal-info input[type=radio] {
 	display: none;
 }
 
 .role-icon {
 	height: 30px;
+}
+
+#event-details {
+	border-left: 1px dashed black;
+}
+
+#event-details input, select, textarea {
+	width: 100%;
+	margin: 4px;
+	border-radius: 5px;
+	border: 1px solid rgb(200,200,200);
+	background-color: rgba(200,200,200,0.3);
+}
+
+
+#event-details textarea {
+	height: 100px;
+}
+
+#event-specifications {
+	border-top: 1px dashed black;
+	margin-top: 30px;
+	padding-top: 20px;
 }
 
 #event-specifications label {
@@ -58,15 +87,6 @@
 
 #event-specifications input[type=checkbox] {
 	display: none;
-}
-
-#event-specifications .row {
-	padding: 15px;
-}
-
-#event-description {
-	border-top: 1px dashed black;
-	margin-top: 30px;
 }
 
 .specification-icon {
