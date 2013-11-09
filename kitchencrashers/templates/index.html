@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
+{% block more_scripts %}
+<script src="{{STATIC_URL}}js/eventDisplay.js"></script>
+{% endblock %}
+
 {% block page_body %}
 
 <div class="container">
@@ -37,85 +41,113 @@
 		</form>
 	</div>
 
-	<!-- Button trigger modal -->
-	<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-		Launch demo modal
-	</button>
-
-	{% include 'addEventModal.html' %}
-
-	<div class="row" id="crash-kitchen-text-row">
-		<div class="col-md-3 col-md-offset-4" id="crash-kitchen-text">UPCOMING MEALS:</div>
+	<div class="row" id="upcoming-events-row">
+		<img class="upcoming-events-row-logo" src="{% static 'crash_kitchen_logo.png' %}">
+		<div class="upcoming-events-row-text">UPCOMING MEALS:</div>
 	</div>
-</div>
-<div class="row">
-	{% for event in events %}
-	<div class="col-md-4" align="center">
-		<div id="title-container"
-		style="font-size: 25px; line-height: 2; text-decoration: underline; ">
-		{{event.name}}
+	<div class="row">
+		<div class="col-md-1"></div>
+		{% for event in events %}
+		<div class="col-md-offset-1 col-md-2 event-box">
+			<div class="event-pic-container">
+				{% if event.picture %}
+				<img class="event-pic" src="{{event.picture.url}}">
+				{% else %}
+				<img class="event-pic" src="{% static 'kitchen_crashers_logo.png' %}">
+				{% endif %}
+				<span class="event-extra-details">
+					<img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
+					<span class="event-details-text float-left">{{event.num_cooks}}</span>
+					<img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
+					<span class="event-details-text float-left">{{event.num_cleaners}}</span>
+					<img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
+					<img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
+				</span>
+			</div>
+			<hr class="event-hr">
+			<div class="event-name">{{event.name|truncatechars:"15"}}</div>
+			<div class="event-host">
+				<img class="event-host-pic" src="{% static 'b.jpg' %}">
+				<div class="event-host-name">
+					Host:{{event.organizer}}
+				</div>
+			</div>
+		</div>
+		{% if forloop.counter|divisibleby:"3" %}
+		</div>
+	<div class="row">
+		<div class="col-md-1"></div>
+		{% endif %}
+		{% endfor %}
 	</div>
-	<div id="outer-container"
-	style="width: 88%; padding-top: 28%; position: relative">
-	<div id="container"
-	style="width: 100%; display: block; position: absolute; top: -3%; bottom: -25%; right: 0%; left: 0%">
-	<img src="{% static 'ticket_frame.png' %}"
-	style="display: block; width: 100%; height: 100%; z-index: 0; position: absolute;" />
-	{% if event.picture %}
-	<img src="{{event.picture.url}}" class="on-ticket-element"
-	style="top: 23%; left: 8%; width: 18%; height: 40%" id="">
-	{% else %}
-	<img src="{% static 'kitchen_crashers_logo.png' %}" class="on-ticket-element"
-	style="top: 23%; left: 8%; width: 18%; height: 40%" id="">
-	{% endif %}
-	<img src="{{event.organizer.user.picture.url}}"
-	id="user-picture"
-	class="on-ticket-element"
-	style="top: 69%; left: 8%; width: 3.5%; height: 8%" id="">
-	<span class="on-ticket-element"
-	style="top: 69%; left: 12%; font-size: 11px">{{event.organizer.user.get_short_name}}</span>
+	<div class="row">
+		{% for event in events %}
+		<div class="col-md-4" align="center">
+			<div id="title-container"
+			style="font-size: 25px; line-height: 2; text-decoration: underline; ">
+			{{event.name}}
+		</div>
+		<div id="outer-container"
+		style="width: 88%; padding-top: 28%; position: relative">
+		<div id="container"
+		style="width: 100%; display: block; position: absolute; top: -3%; bottom: -25%; right: 0%; left: 0%">
+		<img src="{% static 'ticket_frame.png' %}"
+		style="display: block; width: 100%; height: 100%; z-index: 0; position: absolute;" />
+		{% if event.picture %}
+		<img src="{{event.picture.url}}" class="on-ticket-element"
+		style="top: 23%; left: 8%; width: 18%; height: 40%" id="">
+		{% else %}
+		<img src="{% static 'kitchen_crashers_logo.png' %}" class="on-ticket-element"
+		style="top: 23%; left: 8%; width: 18%; height: 40%" id="">
+		{% endif %}
+		<img src="{{event.organizer.user.picture.url}}"
+		id="user-picture"
+		class="on-ticket-element"
+		style="top: 69%; left: 8%; width: 3.5%; height: 8%" id="">
+		<span class="on-ticket-element"
+		style="top: 69%; left: 12%; font-size: 11px">{{event.organizer.user.get_short_name}}</span>
 
-	<img src="{% static 'ticket_vertical.png' %}"
-	class="on-ticket-element"
-	style="top: 20%; left: 30%; width: 4.5%; height: 60%" id="">
+		<img src="{% static 'ticket_vertical.png' %}"
+		class="on-ticket-element"
+		style="top: 20%; left: 30%; width: 4.5%; height: 60%" id="">
 
-	<span class="on-ticket-element"
-	style="top: 21%; left: 40%; font-size: 11px; font-weight: bold;">{{event.date|date:"b"|upper}}.</span>
-	<span class="on-ticket-element"
-	style="top: 24%; left: 36%; font-size: 44px;">{{event.date|date:"d"}}</span>
-	<span class="on-ticket-element"
-	style="top: 68%; left: 37%; font-size: 11px;"
-	title="{{event.location}}, {{event.city}}">{{event.city|truncatechars:"8"}}</span>
+		<span class="on-ticket-element"
+		style="top: 21%; left: 40%; font-size: 11px; font-weight: bold;">{{event.date|date:"b"|upper}}.</span>
+		<span class="on-ticket-element"
+		style="top: 24%; left: 36%; font-size: 44px;">{{event.date|date:"d"}}</span>
+		<span class="on-ticket-element"
+		style="top: 68%; left: 37%; font-size: 11px;"
+		title="{{event.location}}, {{event.city}}">{{event.city|truncatechars:"8"}}</span>
 
 
-	<span class="on-ticket-element"
-	style="background-color: gray; top: 20%; left: 52.5%; height: 61%; width: 0.4%;"></span>
-	<span class="on-ticket-element"
-	style="background-color: gray; top: 40%; left: 52.5%; height: 0.6%; width: 42%;"></span>
-	<span class="on-ticket-element"
-	style="background-color: gray; top: 58%; left: 52.5%; height: 0.6%; width: 42%;"></span>
+		<span class="on-ticket-element"
+		style="background-color: gray; top: 20%; left: 52.5%; height: 61%; width: 0.4%;"></span>
+		<span class="on-ticket-element"
+		style="background-color: gray; top: 40%; left: 52.5%; height: 0.6%; width: 42%;"></span>
+		<span class="on-ticket-element"
+		style="background-color: gray; top: 58%; left: 52.5%; height: 0.6%; width: 42%;"></span>
 
-	<span class="on-ticket-element"
-	style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">{{event.name}}</span>
-	<span class="on-ticket-element"
-	style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;">
-	{{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> <img
-	src="{% static 'hat_on_ticket.png' %}" class="on-ticket-element"
-	style="top: 66%; left: 56.5%; width: 4%;"> <span
-	class="on-ticket-element"
-	style="top: 64%; left: 61.5%; font-size: 14px">{{event.num_cooks}}</span>
+		<span class="on-ticket-element"
+		style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">{{event.name}}</span>
+		<span class="on-ticket-element"
+		style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;">
+		{{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> <img
+		src="{% static 'hat_on_ticket.png' %}" class="on-ticket-element"
+		style="top: 66%; left: 56.5%; width: 4%;"> <span
+		class="on-ticket-element"
+		style="top: 64%; left: 61.5%; font-size: 14px">{{event.num_cooks}}</span>
 
-	<img src="{% static 'bubbles_on_ticket.png' %}"
-	class="on-ticket-element"
-	style="top: 65%; left: 68.5%; width: 4%;"> <span
-	class="on-ticket-element"
-	style="top: 64%; left: 74%; font-size: 14px">{{event.num_cleaners}}</span>
-	<img src="{% static 'map_icon.png' %}" class="on-ticket-element"
-	style="top: 65%; left: 80%; width: 3%; height: 12%;"> <img
-	src="{% static 'clock_on_ticket.png' %}"
-	class="on-ticket-element"
-	style="top: 66%; left: 86%; width: 5%; height: 11%;">
-</div>
+		<img src="{% static 'bubbles_on_ticket.png' %}"
+		class="on-ticket-element"
+		style="top: 65%; left: 68.5%; width: 4%;"> <span
+		class="on-ticket-element"
+		style="top: 64%; left: 74%; font-size: 14px">{{event.num_cleaners}}</span>
+		<img src="{% static 'map_icon.png' %}" class="on-ticket-element"
+		style="top: 65%; left: 80%; width: 3%; height: 12%;"> <img
+		src="{% static 'clock_on_ticket.png' %}"
+		class="on-ticket-element"
+		style="top: 66%; left: 86%; width: 5%; height: 11%;">
+	</div>
 </div>
 </div>
 {% if forloop.counter|divisibleby:"3" %}
@@ -124,4 +156,11 @@
 <hr style="margin-top: 3%">
 <div class="row">{% endif %} {% endfor %}</div>
 </div>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+	Launch demo modal
+</button>
+
+{% include 'addEventModal.html' %}
 {% endblock %}

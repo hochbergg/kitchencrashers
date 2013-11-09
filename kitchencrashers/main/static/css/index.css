@@ -34,7 +34,7 @@
 
 #welcome-row form .form-group
 {
-	max-width: 25%;
+	width: 22%;
 }
 
 
@@ -46,7 +46,7 @@
 
 #welcome-row form #sign-in-button-group
 {
-	width:10.5%;
+	width:10%;
 }
 
 #welcome-row form .form-group button
@@ -62,27 +62,128 @@
 	background-color: #3276b1;
 }
 
-/* Rest of page */
+/* Upcoming Events Row */
 
-.main-page-logo-row
+#upcoming-events-row
 {
-	margin-top: 30px;
-}
-
-.main-page-logo-row img
-{
-	width:100%;
 	text-align: center;
 }
 
+.upcoming-events-row-logo
+{
+	padding:10px;
+	text-align: center;
+	width: 10%;
+}
 
+.upcoming-events-row-text
+{
+	padding:5px;
+	font-size: 28px;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* Event box classes */
+
+.event-box
+{
+	padding-top: 20px;
+}
+
+.event-pic-container
+{
+	position:relative;
+}
+
+.event-pic
+{
+	width:100%;
+	height:150px;
+}
+
+.event-extra-details
+{
+	display:none;
+	position: absolute;
+	bottom: 0px;
+	height:30px;
+	width:100%;
+	color:white;
+	background-color: black;
+	padding-top:2px;
+	padding-bottom:9px;
+	
+}
+
+.event-details-pic
+{
+	margin:1px;
+	height:100%;
+	padding-left:10px;
+}
+
+.float-left
+{
+	float:left;
+}
+
+.float-right
+{
+	float:right;
+}
+
+.event-details-text
+{
+	vertical-align: middle;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.event-hr
+{
+	height:2px;
+	border-color:black;
+	background-color: black;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.event-name
+{
+	font-size: 25px;
+}
+
+.event-host-pic
+{
+	height:40px;
+	width:40px;
+	vertical-align: top;
+}
+
+.event-host
+{
+	display:inline-block;
+	padding: 1px;
+}
+
+.event-host-name
+{
+	padding-top: 5px;
+	display:inline-block;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.event-host-rating
+{
+	display:inline-block;
+	font-size: 12px;
+}
 /* Legacy */
 
 
-#crash-kitchen-text-row
-{
-	margin-top:13px;
-}
+
 
 #crash-kitchen-text
 {
@@ -122,68 +223,4 @@
 	display: block; 
 	position:absolute; 
 	z-index: 1;
-}
-
-.event-title-row
-{
-	height:20px;
-}
-
-.modal-header {
-	background-color: black;
-	color: white;
-}
-
-.modal-title {
-	text-transform: uppercase;
-	font-weight: bold;
-	font-size: 1.8em;
-	vertical-align: bottom;
-}
-
-.modal-icon {
-	height: 40px;
-	margin-right: 20px;
-}
-
-.close {
-	color: white;
-	opacity: 1;
-}
-
-.close:hover {
-	color: white;
-}
-
-.modal-body {
-	padding: 50px;
-}
-
-#event-basic-info {
-	border-right: 1px dashed black;
-}
-
-#event-specifications label {
-	cursor: pointer;
-	cursor: hand;
-	text-align: center;
-}
-
-#event-specifications input {
-	display: none;
-}
-
-#event-specifications .row {
-	padding: 15px;
-}
-
-#event-description {
-	border-top: 1px dashed black;
-	margin-top: 30px;
-}
-
-.specification-icon {
-	height: 50px;
-	cursor: pointer;
-	cursor: hand;
 }
