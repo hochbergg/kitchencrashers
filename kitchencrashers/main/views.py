@@ -51,9 +51,6 @@ def saveEventToDB(event_form,request):
 def createEvent(request):
     if (request.method == 'POST'):
         form = EventForm(request.POST, request.FILES)
-        print '******************************'
-        print form.is_valid()
-        print '******************************'
         if (form.is_valid()):
             id = saveEventToDB(form, request)
             return HttpResponseRedirect("/showEvent/" + str(id))
