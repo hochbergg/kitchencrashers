@@ -2,7 +2,9 @@
 {
 	max-height: 50px;
 	background-color:black;
-
+	border-color: black;
+	border-radius: 0;
+	margin-bottom: 0px;
 }
 
 .navbar-brand
