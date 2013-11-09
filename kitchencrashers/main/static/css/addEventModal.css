@@ -1,0 +1,64 @@
+
+.event-title-row
+{
+	height:20px;
+}
+
+.modal-header {
+	background-color: black;
+	color: white;
+}
+
+.modal-title {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 1.8em;
+	vertical-align: bottom;
+}
+
+.modal-icon {
+	height: 40px;
+	margin-right: 20px;
+}
+
+.close {
+	color: white;
+	opacity: 1;
+}
+
+.close:hover {
+	color: white;
+}
+
+.modal-body {
+	padding: 50px;
+}
+
+#event-basic-info {
+	border-right: 1px dashed black;
+}
+
+#event-specifications label {
+	cursor: pointer;
+	cursor: hand;
+	text-align: center;
+}
+
+#event-specifications input {
+	display: none;
+}
+
+#event-specifications .row {
+	padding: 15px;
+}
+
+#event-description {
+	border-top: 1px dashed black;
+	margin-top: 30px;
+}
+
+.specification-icon {
+	height: 50px;
+	cursor: pointer;
+	cursor: hand;
+}

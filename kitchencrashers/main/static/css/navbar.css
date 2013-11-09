@@ -27,6 +27,16 @@
 	vertical-align: middle;
 }
 
+#navbar-brand-text a
+{
+	color: white;
+}
+
+#navbar-brand-text a:hover
+{
+	text-decoration: none;
+}
+
 #navbar-search-div
 {
 	position:relative;
