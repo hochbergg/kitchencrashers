@@ -79,6 +79,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'dajaxice.finders.DajaxiceFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
@@ -89,7 +90,7 @@ SECRET_KEY = 'czxp^1)z9ozv*so@2286trj+2ra!0l=hwc_29i_a0pk&0svoi('
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -128,6 +129,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'kitchencrashers.main',
     'floppyforms',
+    'dajaxice',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

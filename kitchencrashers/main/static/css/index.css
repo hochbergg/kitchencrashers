@@ -8,6 +8,7 @@
 	height:300px;
 	color:white;
 	font-weight: bold;
+	margin-top: -20px; /* To get over the navbar's margin */
 
 }
 
@@ -287,7 +288,7 @@
     background-color: #e5e5e5;
 }
 
-.tt-suggestion, .dropdown-option {
+.tt-suggestion, .dropdown-option, .remove-filter {
 	color: #000;
 	font-weight: normal;
 	text-align: center;
@@ -299,9 +300,18 @@
 }
 
 input.search-element[type='text'] {
-	width: 300px;
+	width: 200px;
 }
 
 input.search-element[type='text'] + span + span.tt-dropdown-menu {
-	min-width: 300px;
+	min-width: 200px;
+}
+
+
+input.money.search-element[type='text'] {
+	width: 100px;
+}
+
+input.money.search-element[type='text'] + span + span.tt-dropdown-menu {
+	min-width: 200px;
 }

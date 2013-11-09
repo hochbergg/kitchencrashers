@@ -67,3 +67,23 @@ def showEvent(request, eventID):
     event.cleaners = event.participants.filter(rsvp=RsvpOptions().CLEANER).count()
     event.per_person = event.budget / (event.participants.count() + 1)
     return render(request, "ShowEvent.html", {'event': event})
+
+
+from django.utils import simplejson
+from dajaxice.decorators import dajaxice_register
+from django.core import serializers
+
+@dajaxice_register
+def search_api(request,data):
+    filter = simplejson.loads(data)
+
+    q = Event.objects.all()
+    for k,v in filter.iteritems():
+        if k == 'location':
+            q = q.filter(city=v[0])
+        elif k == 'category':
+            q = q.filter(category=v[0])
+
+    all_objects = list(q)
+    data = simplejson.loads(serializers.serialize('json', all_objects))
+    return simplejson.dumps({'events':data, 'success':True})\
