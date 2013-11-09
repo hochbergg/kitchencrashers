@@ -8,6 +8,7 @@
 	height:300px;
 	color:white;
 	font-weight: bold;
+
 }
 
 #welcome-row .highlight-text
@@ -27,9 +28,11 @@
 {
 	padding:2px;
 	height:50px;
-	width: 85%;
+	width: auto;
+	display: inline-block;
 	background-color: #001537;
 	border-color: #001537;
+	border-radius: 5px;
 }
 
 #welcome-row form .form-group
@@ -60,6 +63,7 @@
 #welcome-row form .form-group button:hover
 {
 	background-color: #3276b1;
+
 }
 
 /* Rest of page */
@@ -186,4 +190,81 @@
 	height: 50px;
 	cursor: pointer;
 	cursor: hand;
+}
+.btn-search {
+	background-color: #f7f7f7;
+}
+.search-label {
+	display: inline-block;
+	font-weight: bold;
+	color: #fff;
+	font-size: 20px;
+}
+
+.filters-row {
+	margin-bottom: 40px;
+}
+
+.profile-pic {
+	vertical-align: top;
+}
+
+.profile-pic-label {
+	display: inline-block;
+}
+
+.search-form {
+	text-align: left;
+
+}
+
+.filter-element {
+	display: inline-block;
+}
+
+.filter-element:before {
+	content:"\0001"; /* This is a space to make sure things are spaced */
+}
+
+.filters,.add-filter {
+	display: inline-block;
+}
+
+.tt-hint {
+	display: none; /* No hints! */
+}
+
+.btn-search.tt-query {
+	background-color: #f7f7f7 !important; /* I need to fight with typeahead's styles :( */
+	vertical-align: middle !important;
+}
+
+.remove-filter-suggestion {
+	white-space: nowrap;
+	cursor: pointer;
+}
+
+.typeahead-seperator {
+    height: 1px;
+    margin: 9px 0;
+    background-color: #e5e5e5;
+}
+
+.tt-suggestion, .dropdown-option {
+	color: #000;
+	font-weight: normal;
+	text-align: center;
+}
+
+.search-element{
+	height: 100%;
+	font-size: 20px;
+}
+
+input.search-element[type='text'] {
+	width: 300px;
+}
+
+input.search-element[type='text'] + span + span.tt-dropdown-menu {
+	min-width: 300px;
 }

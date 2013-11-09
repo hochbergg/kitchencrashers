@@ -69,59 +69,6 @@
 }
 </style>
 
-<script type="text/html" id="location-filter-template">
-<div class="search-label"> at </div>
-<input type="text" class="location-search btn btn-default btn-search" name="location" value="[[ caption ]]">
-</script>
-
-<script type="text/html" id="category-filter-template">
-<input type="text" class="btn btn-default btn-search category-search" value="[[ caption ]]">
-</script>
-
-<script type="text/html" id="my-job-filter-template">
-<div class="search-label">I want to</div>
-<div class="btn-group">
-	<button type="button" class="btn btn-default btn-search dropdown-toggle" data-toggle="dropdown"> [[ caption ]] <span class="caret"></span></button>
-	<ul class="dropdown-menu" role="menu">
-		<li><a href="#" class="dropdown-option">Cook</a></li>
-		<li><a href="#" class="dropdown-option">Clean</a></li>
-		<li><a href="#" class="dropdown-option">Cook or Clean</a></li>
-	</ul>
-</div>		
-</script>
-
-<script type="text/html" id="meal-filter-template">
-<div class="search-label"> for </div>
-<div class="btn-group">
-	<button type="button" class="btn btn-default btn-search dropdown-toggle" data-toggle="dropdown"> [[ caption ]] <span class="caret"></span></button>
-	<ul class="dropdown-menu" role="menu">
-		<li><a href="#" class="dropdown-option">Lunch</a></li>
-		<li><a href="#" class="dropdown-option">Breakfast</a></li>
-		<li><a href="#" class="dropdown-option">Anything</a></li>
-	</ul>
-</div>
-</script>
-
-<script type="text/html" id="price-filter-template">
-<div class="search-label"> for </div>
-<input type="text" class="btn btn-default btn-search money-from" value="[[ min ]]" size="4">
-<div class="search-label"> to </div>
-<input type="text" class="btn btn-default btn-search money-to" value="[[ max ]]" size="4">
-<div class="search-label"> NIS </div>&nbsp;
-</script>
-
-
-<script type="text/html" id="add-filter-template">
-<div class="btn-group">
-	<button type="button" class="btn btn-default btn-search dropdown-toggle" data-toggle="dropdown"> Add another filter <span class="caret"></span></button>
-	<ul class="dropdown-menu" role="menu">
-		[[#filters]]
-		<li><a href="#" class="add-filter-link" data-filter="[[name]]">[[text]]</a></li>
-		[[/filters]]
-	</ul>
-</div>
-</script>
-
 <script>
 FilterElementType = function(def) {
 	this.name = def.name;
