@@ -7,6 +7,9 @@ import django
 from django.contrib.auth.decorators import login_required
 from forms.event_form import EventForm
 from models import RsvpOptions
+from django.utils import simplejson
+from dajaxice.decorators import dajaxice_register
+from django.core import serializers
 
 
 
@@ -51,9 +54,6 @@ def saveEventToDB(event_form,request):
 def createEvent(request):
     if (request.method == 'POST'):
         form = EventForm(request.POST, request.FILES)
-        print '******************************'
-        print form.is_valid()
-        print '******************************'
         if (form.is_valid()):
             id = saveEventToDB(form, request)
             return HttpResponseRedirect("/showEvent/" + str(id))
@@ -68,6 +68,23 @@ def showEvent(request, eventID):
     event.per_person = event.budget / (event.participants.count() + 1)
     return render(request, "ShowEvent.html", {'event': event})
 
+def MyEvents(request):
+    return render(request, "MyEvents.html")
+    
+@dajaxice_register
+def search_api(request,data):
+    filter = simplejson.loads(data)
+
+    q = Event.objects.all()
+    for k,v in filter.iteritems():
+        if k == 'location':
+            q = q.filter(city=v[0])
+        elif k == 'category':
+            q = q.filter(category=v[0])
+
+    all_objects = list(q)
+    data = simplejson.loads(serializers.serialize('json', all_objects))
+    return simplejson.dumps({'events':data, 'success':True})\
 
 @login_required
 def addParticipantToEvent(request ,eventID):

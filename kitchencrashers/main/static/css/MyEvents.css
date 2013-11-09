@@ -1,0 +1,17 @@
+.my-events-pic{
+	padding:5px;
+	text-align: center;
+	width: 5%;
+	margin: auto;
+}
+
+.my-events-row{
+	text-align: center;
+}
+
+.my-events-title{
+	padding:5px;
+	font-size: 28px;
+	font-weight: bold;
+	text-align: center;
+}

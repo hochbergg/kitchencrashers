@@ -11,6 +11,8 @@ function initTypeahead(filter_element,$el,opts) {
     $el.on("change",function() {
         if ($(this).val() === "") {
             filter_element.delete();
+        } else {
+            filter_element.filter_group.onChange();
         }
     });
 
@@ -24,8 +26,17 @@ function initTypeahead(filter_element,$el,opts) {
     });
 }
 
-function initDropdown(filter_element,$el,with_remove) {
+function getTypeaheadValue(filterElement,$el) {
+    return $el.val();
+}
+
+function initDropdown(filter_element,$el,with_remove,options) {
     with_remove = typeof with_remove !== 'undefined' ? with_remove : true;
+
+    for (var i in options) {
+        option = '<li><a href="#" class="dropdown-option">'+options[i]+'</a></li>';
+        $el.find(".dropdown-menu").append(option);
+    }
 
     if ( with_remove ) {
         remove_opts = '<li class="divider"></li><li><a href="#" class="remove-filter">Remove Filter</a></li>'
@@ -40,7 +51,19 @@ function initDropdown(filter_element,$el,with_remove) {
     $el.on("click",".dropdown-option",function() {
         filter_element.val = {caption: $(this).text()};
         filter_element.render();
+
+        // TODO: Remove code duplication
+        for (var i in options) {
+            option = '<li><a href="#" class="dropdown-option">'+options[i]+'</a></li>';
+            $el.find(".dropdown-menu").append(option);
+        }
+
+        filter_element.filter_group.onChange();
     });
+}
+
+function getDropdownValue(filterElement,$el) {
+    return filterElement.val.caption;
 }
 
 $(function() {
@@ -53,6 +76,9 @@ $(function() {
             initTypeahead(filter_element,filter_element.$el.find(".location-search"),{
                 local: ["Tel Aviv","Jerusalem","Petah Tikvah"]
             });
+        },
+        getValue: function(filter_element,$el) {
+            return getTypeaheadValue(filter_element,$el.find(".location-search"));
         }
     });
 
@@ -65,26 +91,52 @@ $(function() {
             initTypeahead(filter_element,filter_element.$el.find(".category-search"),{
                 local: ["Italian Food","Asado","Chinese Food","Sushi"]
             });
+        },
+        getValue: function(filter_element,$el) {
+            return getTypeaheadValue(filter_element,$el.find(".category-search"));
         }
     });
 
     my_job_filter = new FilterElementType({
         name: "my_job",
-        template: $("#my-job-filter-template")[0].innerHTML,
+        template: $("#dropdown-filter-template")[0].innerHTML,
         initial_value: {caption: "Cook"},
         default_text: "Cook",
         on_create: function(filter_element) {
-            initDropdown(filter_element,filter_element.$el,false);
-        }
+            initDropdown(filter_element,filter_element.$el,false,
+                ['Cook','Clean','Cook or clean']
+            );
+        },
+        getValue: getDropdownValue
     });
 
     meal_filter = new FilterElementType({
         name: "meal",
-        template: $("#meal-filter-template")[0].innerHTML,
+        template: $("#dropdown-filter-template")[0].innerHTML,
         initial_value: {caption: "Dinner"},
         default_text: "for Dinner",
         on_create: function(filter_element) {
-            initDropdown(filter_element,filter_element.$el);
+            initDropdown(filter_element,filter_element.$el,true,
+                ['for Breakfast',
+                'for Lunch',
+                'for Dinner',
+                'for Anything']
+            );
+        },
+        getValue: getDropdownValue
+    });
+
+    old_price_filter = new FilterElementType({
+        name: "price",
+        template: $("#price-filter-template")[0].innerHTML,
+        initial_value: {min: 50, max: 100},
+        default_text: "for 50 to 100 NIS",
+        on_create: function(filter_element) {
+            initTypeahead(filter_element,filter_element.$el.find(".money-from"),{local: []});
+            initTypeahead(filter_element,filter_element.$el.find(".money-to"),{local: []});
+        },
+        getValue: function(filter_element,$el) {
+            return {'from': getTypeaheadValue(filter_element,$el.find(".money-from")), 'to': getTypeaheadValue(filter_element,$el.find(".money-to"))};
         }
     });
 
@@ -96,17 +148,9 @@ $(function() {
         on_create: function(filter_element) {
             initTypeahead(filter_element,filter_element.$el.find(".money-from"),{local: []});
             initTypeahead(filter_element,filter_element.$el.find(".money-to"),{local: []});
+        },
+        getValue: function(filter_element,$el) {
+            return {'from': getTypeaheadValue(filter_element,$el.find(".money-from")), 'to': getTypeaheadValue(filter_element,$el.find(".money-to"))};
         }
     });
-
-    fg = new FilterGroup($("#search-form"), $("#add-filter-template")[0].innerHTML);
-    fg.add_type(location_filter);
-    fg.add_type(category_filter);
-    fg.add_type(my_job_filter);
-    fg.add_type(price_filter);
-    fg.add_type(meal_filter);
-
-    fg.create("my_job");
-    fg.create("location");
-    fg.create("category");
 });
