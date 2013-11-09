@@ -17,7 +17,18 @@ class RsvpOptions():
 				return option[1]
 		return -1
 
+class CategoryOptions():
+	CATEGORY_OPTIONS = (
+		(1,'Italian'),
+		(2, 'Japaneese'),
+		(3, 'Asian'),
+		(4, 'Mediteranian'))
 
+	def get_category_by_id(self, id):
+		for option in self.CATEGORY_OPTIONS:
+			if (option[0] == id):
+				return option[1]
+		return -1
 
 
 # Create your models here.

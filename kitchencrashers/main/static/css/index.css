@@ -124,8 +124,17 @@
 .event-details-pic
 {
 	margin:1px;
-	height:100%;
+	height: 17px;
+	width:15%;
 	padding-left:10px;
+}
+
+.event-details-text
+{
+	padding-left:5px;
+	vertical-align: middle;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .float-left
@@ -138,12 +147,6 @@
 	float:right;
 }
 
-.event-details-text
-{
-	vertical-align: middle;
-	font-size: 14px;
-	font-weight: bold;
-}
 
 .event-hr
 {
@@ -228,6 +231,9 @@
 	display: block; 
 	position:absolute; 
 	z-index: 1;
+<<<<<<< HEAD
+}
+=======
 }
 .btn-search {
 	background-color: #f7f7f7;
@@ -315,3 +321,4 @@ input.money.search-element[type='text'] {
 input.money.search-element[type='text'] + span + span.tt-dropdown-menu {
 	min-width: 200px;
 }
+>>>>>>> 82865d4ba2fbea81f6b94e18b05b566e11c8d7a1

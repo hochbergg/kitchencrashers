@@ -15,83 +15,87 @@
 						{% csrf_token %}
 
 						<div class="row">
-							<div class="col-xs-6" id="event-basic-info">
-								<label for="rsvp">who are you?</label>
-								{{ form.rsvp }}
-
-								<label for="category">category:</label>
-								{{ form.category }}
-
-								<label for="name">what's cooking?</label>
-								{{ form.name }}
-
-								<p>when and where?</p>
-								<label for="id_date">when?</label>
-								{{ form.date }}
+							<div class="col-xs-6" id="event-personal-info">
+								<p>Who Are You?</p>
+								<div class="row">
+									<div class="col-xs-6">
+										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.0.0}}" id="rsvp-cook">
+										<label for="rsvp-cook">
+											<img src="{% static 'hat_on_ticket.png' %}" class="role-icon">
+											<br>
+											{{form.rsvp.field.choices.0.1}}
+										</label>
+									</div>
+									<div class="col-xs-6">
+										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.1.0}}" id="rsvp-cleaner">
+										<label for="rsvp-cleaner">
+											<img src="{% static 'bubbles_on_ticket.png' %}" class="role-icon">
+											<br>
+											{{form.rsvp.field.choices.1.1}}
+										</label>
+									</div>
+								</div>
 								<br>
-								<label for="id_location">where?</label>
-								{{ form.location }}							
-								<label for="id_city"></label>
-								{{ form.city }}
-
-								<p>gimme some numbers</p>
-								<label for="id_budget">budget:</label>
-								{{ form.budget }}
-								<label for="id_max_people">maximum crashing party:</label>
-								{{ form.max_people }}
-							</div>
-
-							<div class="col-xs-6" id="event-specifications">
-								any specification?
-
-								<div class="row">
-									<div class="col-xs-6">
-										{{ form.is_vegeterian }}
-										<label for="id_is_vegetarian">
-											<img src="{% static 'veg_icon.png' %}"
-											class="specification-icon">
-											<br>
-											vegetarian
-										</label>
-									</div>
-									<div class="col-xs-6">
-										{{ form.is_vegan }}
-										<label for="id_is_vegan">
-											<img src="{% static 'vegan_icon.png' %}"
-											class="specification-icon">
-											<br>
-											vegan
-										</label>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-xs-6">
-										{{ form.is_kosher }}
-										<label for="is_kosher">
-											<img src="{% static 'kosher_icon.png' %}"
-											class="specification-icon">
-											<br>
-											kosher
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row" id="event-description">
-							<div class="col-xs-4">
-								<label for="picture">add pictures of your kitchen or a meal you made</label>
+								<label for="id_picture">
+									<div id="add-pic">add pictures of your kitchen or a meal you made</div>
+								</label>
 								{{ form.picture }}
 							</div>
-							<div class="col-xs-8">
-								<label for="description">describe this event: what are you going to prepare? what will be the atmosphere?</label>
+
+							<div class="col-xs-6" id="event-details">
+								<p>What's Cooking?</p>
+								{{ form.name }}
+								{{ form.category }}
 								{{ form.description }}
+								<p></p>
+
+								<p>When and Where?</p>
+								{{ form.date }}
+								{{ form.location }}							
+								{{ form.city }}
+								<p></p>
+
+								<p>Gimme Some Numbers</p>
+								<p id="numbers-details">
+									{{ form.budget }}
+									<label for="id_budget">$ in total</label>
+									<br>
+									{{ form.max_people }}
+									<label for="id_max_people">crashers at most</label>
+								</p>
+							</div>
+						</div>
+						<div class="row" id="event-specifications">
+							<div id="tags-title" class="col-xs-4">
+								Tags:
+							</div>
+							<div class="col-xs-2">
+								{{ form.is_vegeterian }}
+								<label for="id_is_vegetarian">
+									<img src="{% static 'veg_icon.png' %}"
+											class="specification-icon">						
+									<br>vegetarian</label>
+							</div>
+							<div class="col-xs-2">
+								{{ form.is_vegan }}
+								<label for="id_is_vegan">
+									<img src="{% static 'vegan_icon.png' %}"
+											class="specification-icon">						
+									<br>vegan</label>
+							</div>
+							<div class="col-xs-2">
+								{{ form.is_kosher }}
+								<label for="is_kosher">
+									<img src="{% static 'kosher_icon.png' %}"
+											class="specification-icon">						
+									<br>kosher</label>
 							</div>
 						</div>
 					</div>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Never Mind</button>
-						<button type="submit" class="btn btn-primary">Let's Eat!</button>
+						<button type="submit" class="btn btn-primary" id="eat-button">Let's Eat!</button>
 					</div>
 				</form>
 			</div><!-- /.modal-content -->

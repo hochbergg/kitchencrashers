@@ -23,8 +23,8 @@ def search(request):
 
 def saveEventToDB(event_form,request):
     event = Event()
+    event.category = models.CategoryOptions().get_category_by_id(int(event_form.cleaned_data['category']))
     event.budget = event_form.cleaned_data['budget']
-    event.category = event_form.cleaned_data['category']
     event.date = event_form.cleaned_data['date']
     event.description = event_form.cleaned_data['description']
     event.is_kosher = event_form.cleaned_data['is_kosher']
@@ -41,8 +41,8 @@ def saveEventToDB(event_form,request):
 
     event.save()
 
-    participant = models.EventParticipant(event = event, user = user, rsvp = models.RsvpOptions().\
-        get_rsvp_by_id(int(event_form.cleaned_data['rsvp'])))
+    participant = models.EventParticipant(event = event, user = user, \
+        rsvp = models.RsvpOptions().get_rsvp_by_id(int(event_form.cleaned_data['rsvp'])))
     participant.save()
 
     return event.id
