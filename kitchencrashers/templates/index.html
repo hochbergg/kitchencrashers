@@ -10,8 +10,8 @@
 
 <script>
 $(function() {
-	fg = new FilterGroup($("#search-form"), $("#add-filter-template")[0].innerHTML,
-        function(fg) { }
+    fg = new FilterGroup($("#search-form"), $("#add-filter-template")[0].innerHTML,
+        function(fg) {}
     );
     fg.add_type(location_filter);
     fg.add_type(category_filter);
@@ -39,50 +39,46 @@ $(function() {
         </div>-->
         <button type='button' class='btn btn-primary'>Crash</button>
     </form>
+</div>
 
 <div class="container">
-	<!-- Welcome Row -->
-	
-
-	<div class="row" id="upcoming-events-row">
-		<img class="upcoming-events-row-logo" src="{% static 'crash_kitchen_logo.png' %}">
-		<div class="upcoming-events-row-text">UPCOMING MEALS:</div>
-	</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		{% for event in events %}
-		<div class="col-md-offset-1 col-md-2 event-box">
-			<div class="event-pic-container">
-				{% if event.picture %}
-				<img class="event-pic" src="{{event.picture.url}}">
-				{% else %}
-				<img class="event-pic" src="{% static 'kitchen_crashers_logo.png' %}">
-				{% endif %}
-				<span class="event-extra-details">
-					<img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
-					<span class="event-details-text float-left">{{event.num_cooks}}</span>
-					<img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
-					<span class="event-details-text float-left">{{event.num_cleaners}}</span>
-					<img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
-					<img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
-				</span>
-			</div>
-			<hr class="event-hr">
-			<div class="event-name">{{event.name|truncatechars:"15"}}</div>
-			<div class="event-host">
-				<img class="event-host-pic" src="{% static 'b.jpg' %}">
-				<div class="event-host-name">
-					Host:{{event.organizer}}
-				</div>
-			</div>
-		</div>
-		{% if forloop.counter|divisibleby:"3" %}
-		</div>
-	<div class="row">
-		<div class="col-md-1"></div>
-		{% endif %}
-		{% endfor %}
-	</div>
+    <!-- Welcome Row -->
+    <div class="row" id="upcoming-events-row">
+        <img class="upcoming-events-row-logo" src="{% static 'crash_kitchen_logo.png' %}">
+        <div class="upcoming-events-row-text">UPCOMING MEALS:</div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        {% for event in events %}
+        <div class="col-md-offset-1 col-md-2 event-box">
+            <div class="event-pic-container">
+                {% if event.picture %}
+                <img class="event-pic" src="{{event.picture.url}}">{% else %}
+                <img class="event-pic" src="{% static 'kitchen_crashers_logo.png' %}">{% endif %}
+                <span class="event-extra-details">
+                    <img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
+                    <span class="event-details-text float-left">{{event.num_cooks}}</span>
+                    <img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
+                    <span class="event-details-text float-left">{{event.num_cleaners}}</span>
+                    <img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
+                    <img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
+                </span>
+            </div>
+            <hr class="event-hr">
+            <div class="event-name">{{event.name|truncatechars:"15"}}</div>
+            <div class="event-host">
+                <img class="event-host-pic" src="{% static 'b.jpg' %}">
+                <div class="event-host-name">
+                    Host:{{event.organizer}}
+                </div>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:"3" %}
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        {% endif %} {% endfor %}
+    </div>
     <div class="row">
         {% for event in events %}
         <div class="col-md-4" align="center">
@@ -133,5 +129,4 @@ $(function() {
     Launch demo modal
 </button>
 
-{% include 'addEventModal.html' %}
-{% endblock %}
+{% include 'addEventModal.html' %} {% endblock %}
