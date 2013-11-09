@@ -43,6 +43,11 @@
 	margin-top: 0; 
 }
 
+
+.unchecked-label {
+	color: rgb(180,180,180);
+}
+
 #event-personal-info label {
 	cursor: pointer;
 	cursor: hand;

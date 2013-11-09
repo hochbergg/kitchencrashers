@@ -8,4 +8,3 @@ db
 /kitchencrashers/main/*.pyc
 /kitchencrashers/main/forms/*.pyc
 /kitchencrashers/media/*
-db

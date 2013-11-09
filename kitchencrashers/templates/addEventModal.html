@@ -18,18 +18,18 @@
 							<div class="col-xs-6" id="event-personal-info">
 								<p>Who Are You?</p>
 								<div class="row">
-									<div class="col-xs-6">
+									<div class="col-xs-6 role-container">
 										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.0.0}}" id="rsvp-cook">
-										<label for="rsvp-cook">
-											<img src="{% static 'hat_on_ticket.png' %}" class="role-icon">
+										<label for="rsvp-cook" class="unchecked-label">
+											<img src="{% static 'grey_hat_on_ticket_icon.png' %}" class="role-icon">
 											<br>
 											{{form.rsvp.field.choices.0.1}}
 										</label>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-xs-6 role-container">
 										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.1.0}}" id="rsvp-cleaner">
-										<label for="rsvp-cleaner">
-											<img src="{% static 'bubbles_on_ticket.png' %}" class="role-icon">
+										<label for="rsvp-cleaner" class="unchecked-label">
+											<img src="{% static 'grey_bubbles_on_ticket_icon.png' %}" class="role-icon">
 											<br>
 											{{form.rsvp.field.choices.1.1}}
 										</label>
@@ -69,24 +69,25 @@
 							<div id="tags-title" class="col-xs-4">
 								Tags:
 							</div>
-							<div class="col-xs-2">
+							<div class="col-xs-offset-2"></div>
+							<div class="col-xs-2 specification-container" name="gfg">
 								{{ form.is_vegeterian }}
-								<label for="id_is_vegetarian">
-									<img src="{% static 'veg_icon.png' %}"
+								<label for="id_is_vegeterian" class="unchecked-label">
+									<img src="{% static 'grey_veg_icon.png' %}"
 											class="specification-icon">						
 									<br>vegetarian</label>
 							</div>
-							<div class="col-xs-2">
+							<div class="col-xs-2 specification-container">
 								{{ form.is_vegan }}
-								<label for="id_is_vegan">
-									<img src="{% static 'vegan_icon.png' %}"
+								<label for="id_is_vegan" class="unchecked-label">
+									<img src="{% static 'grey_vegan_icon.png' %}"
 											class="specification-icon">						
 									<br>vegan</label>
 							</div>
-							<div class="col-xs-2">
+							<div class="col-xs-2 specification-container">
 								{{ form.is_kosher }}
-								<label for="is_kosher">
-									<img src="{% static 'kosher_icon.png' %}"
+								<label for="id_is_kosher" class="unchecked-label">
+									<img src="{% static 'grey_kosher_icon.png' %}"
 											class="specification-icon">						
 									<br>kosher</label>
 							</div>
