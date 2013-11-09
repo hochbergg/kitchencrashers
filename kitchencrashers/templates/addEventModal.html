@@ -16,7 +16,7 @@
 
 						<div class="row">
 							<div class="col-xs-6" id="event-personal-info">
-								<p>who are you?</p>
+								<p>Who Are You?</p>
 								<div class="row">
 									<div class="col-xs-6">
 										<input type="radio" name="rsvp" required value="{{form.rsvp.field.choices.0.0}}" id="rsvp-cook">
@@ -37,29 +37,36 @@
 								</div>
 								<br>
 								<label for="id_picture">
-									<div class="add-pic">add pictures of your kitchen or a meal you made</div>
+									<div id="add-pic">add pictures of your kitchen or a meal you made</div>
 								</label>
 								{{ form.picture }}
 							</div>
 
 							<div class="col-xs-6" id="event-details">
-								<p>what's cooking?</p>
+								<p>What's Cooking?</p>
 								{{ form.name }}
 								{{ form.category }}
 								{{ form.description }}
+								<p></p>
 
-								<p>when and where?</p>
+								<p>When and Where?</p>
 								{{ form.date }}
 								{{ form.location }}							
 								{{ form.city }}
+								<p></p>
 
-								<p>gimme some numbers</p>
-								{{ form.budget }}
-								{{ form.max_people }}
+								<p>Gimme Some Numbers</p>
+								<p id="numbers-details">
+									{{ form.budget }}
+									<label for="id_budget">$ in total</label>
+									<br>
+									{{ form.max_people }}
+									<label for="id_max_people">crashers at most</label>
+								</p>
 							</div>
 						</div>
 						<div class="row" id="event-specifications">
-							<div class="col-xs-4">
+							<div id="tags-title" class="col-xs-4">
 								Tags:
 							</div>
 							<div class="col-xs-2">
@@ -88,7 +95,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Never Mind</button>
-						<button type="submit" class="btn btn-primary">Let's Eat!</button>
+						<button type="submit" class="btn btn-primary" id="eat-button">Let's Eat!</button>
 					</div>
 				</form>
 			</div><!-- /.modal-content -->

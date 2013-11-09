@@ -43,10 +43,6 @@
 	margin-top: 0; 
 }
 
-#event-personal-info {
-	/*border-right: 1px dashed black;*/
-}
-
 #event-personal-info label {
 	cursor: pointer;
 	cursor: hand;
@@ -58,12 +54,12 @@
 }
 
 .role-icon {
-	height: 50px;
+	height: 55px;
 	margin: 2px;
 }
 
-.add-pic {
-	margin: auto;
+#add-pic {
+	margin: 40px auto;
 	width: 200px;
 	height: 200px;
 	padding: 5px;
@@ -84,21 +80,52 @@
 
 #event-details input, select, textarea {
 	width: 100%;
-	margin: 4px;
+	margin: 4px 0;
 	border-radius: 5px;
 	border: 1px solid rgb(200,200,200);
 	background-color: rgba(200,200,200,0.3);
 }
 
-
 #event-details textarea {
 	height: 100px;
+}
+
+#event-details input[type=date] {
+	width: 60%;
+	float: left;
+}
+
+#event-details input[type=time] {
+	width: 30%;
+	float: right;
+}
+
+#numbers-details {
+	text-align: left;
+	font-size: 1em;
+}
+
+#numbers-details label {
+	font-weight: normal;
+}
+
+#id_budget {
+	width: 30% !important;
+}
+
+#id_max_people {
+	width: 30% !important;
 }
 
 #event-specifications {
 	border-top: 1px dashed black;
 	margin-top: 30px;
 	padding-top: 20px;
+}
+
+#tags-title {
+	text-align: left;
+	font-size: 1.5em;
 }
 
 #event-specifications label {
@@ -115,4 +142,9 @@
 	height: 50px;
 	cursor: pointer;
 	cursor: hand;
+}
+
+#eat-button {
+	background-color: black;
+	border-color: rgb(200,200,200);
 }

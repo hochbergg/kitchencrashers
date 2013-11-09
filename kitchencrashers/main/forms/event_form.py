@@ -11,7 +11,7 @@ class EventForm(forms.Form):
     city = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'city'}))
     category = forms.ChoiceField(choices=CategoryOptions().CATEGORY_OPTIONS)
     description = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'don\'t be shy - tell us about it some more'}))
-    budget = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'total budget'}))
+    budget = forms.IntegerField()
     max_people = forms.IntegerField()
     is_vegan = forms.BooleanField(required=False)
     is_kosher = forms.BooleanField(required=False)
