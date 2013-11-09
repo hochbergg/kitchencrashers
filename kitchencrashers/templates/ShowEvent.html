@@ -2,80 +2,189 @@
 {% load staticfiles %}
 
 {% block more_stylesheets %}
-<link rel="stylesheet" href="{% static 'css/ShowEvent.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ShowEvent.css' %}">
 {% endblock %}
 
-{% block page_body %}	
-<div class="container">
-	<div class="row">
-		<h1>{{ event.name }}</h1>
-		<h4>{{ event.category }}</h4>
-	</div>
-	<div class="row">
-		<div class="col-lg-4">
-			<img id="event-main-picture" src="{{ event.picture.url }}" height="270px">
-		</div>
-		<div class="col-lg-4 col-lg-offset-1"  align="center">
-			<div id="outer-container"
-			style="width: 88%; padding-top: 28%; position: relative">
-			<div id="container"
-			style="width: 100%; display: block; position: absolute; top: -3%; bottom: -25%; right: 0%; left: 0%">
-			
-			<img
-			src="{% static 'hat_on_ticket.png' %}" class="on-ticket-element"
-			style="top: 23%; left: 10%; height: 15%">
-			<span class="on-ticket-element" id="num-of-cooks">{{event.num_cooks}}</span>
-			<span class="on-ticket-element small-not-highlighted-text"
-			style="top: 38%; left: 10%;" id="">Cooks</span>
-			<span class="on-ticket-element"
-			style="background-color: black; top: 50%; left: 7%; height: 0.4%; width: 18%;"></span>
-			<img src="{{event.organizer.user.picture.url}}"
-			id="user-picture"
-			class="on-ticket-element"
-			style="top: 69%; left: 8%; width: 3.5%; height: 8%" id="">
-			<span class="on-ticket-element"
-			style="top: 69%; left: 12%; font-size: 11px">{{event.organizer.user.get_short_name}}</span>
+{% block page_body %}
+    <div class="container">
+        <!--div class="row">
+            <h1>{{ event.name }}</h1>
+            <h4>{{ event.category }}</h4>
+        </div-->
+        <div id="event-description-all" class="row">
+            <div id="empty-column-left" class="col-md-2"></div>
+            <div id="event-photos-container" class="col-md-4"> <!--border-right -->
+                <img id="event-main-picture" src="{{ event.picture.url }}" height="270px">
+            </div>
+            <div id="event-details-container" class="col-md-4">
+                <div id="event-details-ticket" class="clearfix">
+                    <div id="ticket-div-1" class="event-details-ticket-boxes">
+                        <div id="ticket-div-1-1">
+                            <div id="ticket-div-1-1-1" class="clearfix">
+                                <div id="ticket-div-1-1-1-1" >
+                                    <img id="cookers-logo"
+                                     src="{% static 'hat_on_ticket.png' %}" class="ticket-logos">
+                                </div>
+                                <div id="ticket-div-1-1-1-2">
+                                    <span class="on-ticket-element-new ticket-texts" id="cookers-counter-text">{{event.num_cooks}}</span>
+                                </div>
+                            </div>
+                            <div id="ticket-div-1-1-2">
+                                <span class="on-ticket-element-new ticket-texts" id="text-cooks">Cooks</span>
+                            </div>
+                        </div>
+                        <div id="ticket-div-1-2">
+                            <div id="ticket-div-1-2-1">
+                                <div id="ticket-div-1-2-1-1">
+                                    <img id="cleaners-logo" src="{% static 'bubbles_on_ticket.png' %}"
+                             class="ticket-logos">
+                                </div>
+                                <div id="ticket-div-1-2-1-2">
+                                    <span id="cleaners-counter-text" class="on-ticket-element-new ticket-texts"
+                                    >{{event.num_cleaners}}</span>
+                                </div>
+                            </div>
+                            <div id="ticket-div-1-2-2">
+                                <span id="cleaners-title-text" class="on-ticket-element-new ticket-texts">Cleaners</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ticket-div-2" class="event-details-ticket-boxes">
+                         <img src="{% static 'ticket_vertical.png' %}"
+                             class="on-ticket-element-new ticket-logos"
+                             id="ticket-logo-line-1">
+                    </div>
+                    <div id="ticket-div-3" class="event-details-ticket-boxes">
+                        <div id="ticket-div-3-1" class="event-details-ticket-boxes">
+                            <span id='event-date-text-month' class="on-ticket-element-new"
+                              style="">{{event.date|date:"b"|upper}}.</span>
+                        </div>
+                        <div id="ticket-div-3-2" class="event-details-ticket-boxes">
+                            <span id="event-date-text-day" class="ticket-texts"
+                              >{{event.date|date:"d"}}</span>
+                        </div>
+                        <div id="ticket-div-3-3" class="event-details-ticket-boxes">
+                            <span id='event-location-text' class="ticket-texts"
+                              title="{{event.location}}, {{event.city}}">{{event.city|truncatechars:"8"}}</span>
+                        </div>
 
-			<img src="{% static 'ticket_vertical.png' %}"
-			class="on-ticket-element"
-			style="top: 20%; left: 30%; width: 4.5%; height: 60%" id="">
+                    </div>
+                    <div id="ticket-div-4" class="event-details-ticket-boxes">
+                        <span id="event-name-text" class="on-ticket-element-new ticket-texts"
+                              >{{event.name}}</span>
+                    </div>
+                </div>
+                <hr id="separator-line-1">
+                <div id="event-details-secondary-title-1" class="event-details-secondary-title">
+                    {{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}
+                    <!--Tomorrow, 19/8/13, 21:00 at Shiri's place,-->
+                </div>
+                <div id="event-details-secondary-title-2" class="event-details-secondary-title">
+                    Balfour 63, Tel Aviv, Israel
+                </div>
+                <div id="event-explanations">
+                    <div id="publishing-user">
+                        <h4 id="user-name">
+                            <img src="{{event.organizer.user.picture.url}}"
+                             id="user-picture"
+                             class="on-ticket-element-new"
+                             >
+                            {{event.organizer.user.get_short_name}}
+                        </h4>
+                    </div>
+                    <p id="event-details-full-text">
+                        So I was thinking, let's have an awesome meal!
+                        And then, like, I opened this event, and invited all my friends!
 
-			<span class="on-ticket-element"
-			style="top: 21%; left: 40%; font-size: 11px; font-weight: bold;">{{event.date|date:"b"|upper}}.</span>
-			<span class="on-ticket-element"
-			style="top: 24%; left: 36%; font-size: 44px;">{{event.date|date:"d"}}</span>
-			<span class="on-ticket-element"
-			style="top: 68%; left: 37%; font-size: 11px;"
-			title="{{event.location}}, {{event.city}}">{{event.city|truncatechars:"8"}}</span>
+                        Let's eat mo-fos!
+                    </p>
+                    <div id="budget-details-total">
+                        <strong>Total Budget: 50$</strong>
+                    </div>
+                    <div id="budget-details-per-person">
+                        If you join now, the price will be 25$ per person
+                    </div>
+                    <div></div>
+                    <div id="event-tags">
+                        <strong>Tags:</strong> Veggie, Kosher
+                        <!--Photos or Text-->
+                    </div>
+                    <hr id="separator-line-2">
+                    <div id="crash-this-kitchen-button">
+                        <p>Crash this kitchen!</p>
+                        <!--text-->
+                        <!--photo-->
+                    </div>
+                </div>
+            </div>
+            <div id="empty-column-right" class="col-md-2">
+
+            </div>
 
 
-			<span class="on-ticket-element"
-			style="background-color: gray; top: 20%; left: 52.5%; height: 61%; width: 0.4%;"></span>
-			
-			<span class="on-ticket-element"
-			style="background-color: gray; top: 58%; left: 52.5%; height: 0.6%; width: 42%;"></span>
+            <!-- Old ticket object -->
+            <!--
+            <div id='old-ticket-container' class="container"
+                         style="">
+                        <img id="cookers-logo"
+                             src="{% static 'hat_on_ticket.png' %}" class="on-ticket-element"
+                             style="">
+                        <span class="on-ticket-element" id="cookers-counter-text">{{event.num_cooks}}</span>
+                        <span class="on-ticket-element small-not-highlighted-text"
+                              style="" id="text-cooks">Cooks</span>
+                        <span class="on-ticket-element" id="under-stroke-for-cooks"></span>
+                        <img src="{{event.organizer.user.picture.url}}"
+                             id="user-picture"
+                             class="on-ticket-element"
+                             style="">
+                        <span id="user-name-short" class="on-ticket-element"
+                              style="">{{event.organizer.user.get_short_name}}</span>
+                        <img src="{% static 'ticket_vertical.png' %}"
+                             class="on-ticket-element"
+                             style="" id="ticket-logo-line-1">
 
-			<span class="on-ticket-element"
-			style="top: 15%; left: 56%; width: 40%; font-size: 13px; font-weight: bold; line-height: 14px;">{{event.name}}</span>
-			<span class="on-ticket-element"
-			style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;">
-			{{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> 
+                        <span id='event-date-text-month' class="on-ticket-element top-text-in-ticket"
+                              style="">{{event.date|date:"b"|upper}}.</span>
+                        <span id="event-date-text-day" class="on-ticket-element"
+                              style="">{{event.date|date:"d"}}</span>
+                        <span id='event-location-text' class="on-ticket-element"
+                              style="" title="{{event.location}}, {{event.city}}">{{event.city|truncatechars:"8"}}</span>
 
-			<img src="{% static 'bubbles_on_ticket.png' %}"
-			class="on-ticket-element"
-			style="top: 65%; left: 68.5%; width: 4%;"> <span
-			class="on-ticket-element"
-			style="top: 64%; left: 74%; font-size: 14px">{{event.num_cleaners}}</span>
-			<img src="{% static 'map_icon.png' %}" class="on-ticket-element"
-			style="top: 65%; left: 80%; width: 3%; height: 12%;"> <img
-			src="{% static 'clock_on_ticket.png' %}"
-			class="on-ticket-element"
-			style="top: 66%; left: 86%; width: 5%; height: 11%;">
-		</div>
-	</div>
-</div>
+                        <span id="ticket-logo-box-1" class="on-ticket-element"
+                              style=""></span>
 
-		<!--
+                        <span id="ticket-logo-box-2" class="on-ticket-element"
+                              style=""></span>
+
+                        <span id="event-name-text" class="on-ticket-element top-text-in-ticket"
+                              style="">{{event.name}}</span>
+                        <span id="event-date-text-exact-time" class="on-ticket-element"
+                              style="">
+                            {{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}
+                        </span>
+                        <img id="cleaners-logo" src="{% static 'bubbles_on_ticket.png' %}"
+                             class="on-ticket-element"
+                             style="">
+                        <span id="cleaners-counter-text" class="on-ticket-element"
+                              style="">{{event.num_cleaners}}</span>
+                        <img id="map-pointer-logo" src="{% static 'map_icon.png' %}" class="on-ticket-element"
+                             style="">
+                        <img id="clock-logo"
+                            src="{% static 'clock_on_ticket.png' %}"
+                            class="on-ticket-element"
+                            style="">
+                    </div>
+                -->
+
+            </div>
+            <div class="col-lg-4 col-lg-offset-1"  align="center">
+                <div id="outer-container"
+                     style="width: 88%; padding-top: 28%; position: relative">
+
+                </div>
+            </div>
+
+            <!--
 		<div class="row">
 			<h1>{{ event.name }}</h1>
             <h4>{{ event.category }}</h4>
@@ -140,4 +249,4 @@
 		<div class ="row">
 			<div class="col-lg-12"><h2>Comments & Updates</h2></div>
 		</div> -->
-		{% endblock %}
+{% endblock %}
