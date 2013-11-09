@@ -41,7 +41,9 @@
 		<div class="col-md-offset-1 col-md-2 event-box">
 			<div class="event-pic-container">
 				{% if event.picture %}
-				<img class="event-pic" src="{{event.picture.url}}">
+				<a href='/showEvent/{{event.id}}'>
+					<img class="event-pic" src="{{event.picture.url}}">
+				</a>
 				{% else %}
 				<img class="event-pic" src="{% static 'kitchen_crashers_logo.png' %}">
 				{% endif %}

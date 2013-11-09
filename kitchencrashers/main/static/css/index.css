@@ -24,23 +24,6 @@
 	margin-top: 10px;
 }
 
-#welcome-row form
-{
-	padding:2px;
-	height:50px;
-	width: auto;
-	display: inline-block;
-	background-color: #001537;
-	border-color: #001537;
-	border-radius: 5px;
-}
-
-#welcome-row form .form-group
-{
-	width: 22%;
-}
-
-
 #welcome-row form .form-group .form-control
 {
 	height:100%;
@@ -258,11 +241,18 @@
 
 .search-form {
 	text-align: left;
-
+	padding:2px;
+	height:50px;
+	width: auto;
+	display: inline-block;
+	background-color: #001537;
+	border-color: #001537;
+	border-radius: 5px;
 }
 
 .filter-element {
 	display: inline-block;
+	width:auto;
 }
 
 .filter-element:before {
