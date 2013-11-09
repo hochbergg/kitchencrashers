@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function initializeEventHover() {
 	$('.event-pic-container').hover(
 		function(){
 			block = $(this).find('.event-extra-details');
@@ -14,4 +14,6 @@ $(document).ready(function() {
 			// })
 
 	})
-})
+}
+
+$(document).ready(initializeEventHover);

@@ -4,6 +4,7 @@ FilterElementType = function(def) {
     this.initial_value = def.initial_value;
     this.default_text = def.default_text;
     this.on_create = def.on_create;
+    this.getValue = def.getValue;
 }
 
 FilterElementType.prototype.create = function(filter_group,$el) {
@@ -28,11 +29,21 @@ FilterElement.prototype.delete = function() {
     this.filter_group.remove_element(this);
 }
 
-FilterGroup = function($el,add_filter_template) {
+FilterElement.prototype.getValue = function() {
+    return this.type.getValue(this,this.$el);
+}
+
+FilterGroup = function($el,add_filter_template,onChange) {
     this.$el = $el;
     this.filters = []
     this.filter_types = {}
     this.add_filter_template = Hogan.compile(add_filter_template,{delimiters: "[[ ]]"});
+
+    if (typeof(onChange) == 'undefined') {
+        onChange = function() {}
+    }
+
+    this._onChange = onChange;
 
     var me = this; // For the closure
     this.$el.on("click",".add-filter-link",function(e) {
@@ -44,6 +55,10 @@ FilterGroup = function($el,add_filter_template) {
     this.update_left_dropdown();
 }
 
+FilterGroup.prototype.onChange = function(element) {
+    this._onChange(this);
+}
+
 FilterGroup.prototype.remove_element = function(element) {
     index = this.filters.indexOf(element);
 
@@ -52,6 +67,7 @@ FilterGroup.prototype.remove_element = function(element) {
     }
 
     this.update_left_dropdown();
+    this.onChange();
 }
 
 FilterGroup.prototype.add_type = function(type) {
@@ -68,6 +84,7 @@ FilterGroup.prototype.create = function(type_name) {
 
     this.filters.push(type.create(this,$new_el));
     this.update_left_dropdown();
+    this.onChange();
 }
 
 FilterGroup.prototype.update_left_dropdown = function() {
@@ -102,6 +119,16 @@ FilterGroup.prototype.find_left_filters = function() {
     return left
 }
 
-FilterGroup.prototype.to_query = function() {
-    // IMPLEMENT THIS
+FilterGroup.prototype.toQuery = function() {
+    out = {}
+    for(var i=0;i<this.filters.length;i++) {
+        name = this.filters[i].type.name;
+        if (!(name in out)) {
+            out[name] = []
+        }
+
+        out[name].push(this.filters[i].getValue());
+    }
+
+    return out;
 }

@@ -8,6 +8,7 @@
 	height:300px;
 	color:white;
 	font-weight: bold;
+	margin-top: -20px; /* To get over the navbar's margin */
 
 }
 
@@ -23,23 +24,6 @@
 {
 	margin-top: 10px;
 }
-
-#welcome-row form
-{
-	padding:2px;
-	height:50px;
-	width: auto;
-	display: inline-block;
-	background-color: #001537;
-	border-color: #001537;
-	border-radius: 5px;
-}
-
-#welcome-row form .form-group
-{
-	width: 22%;
-}
-
 
 #welcome-row form .form-group .form-control
 {
@@ -258,11 +242,18 @@
 
 .search-form {
 	text-align: left;
-
+	padding:2px;
+	height:50px;
+	width: auto;
+	display: inline-block;
+	background-color: #001537;
+	border-color: #001537;
+	border-radius: 5px;
 }
 
 .filter-element {
 	display: inline-block;
+	width:auto;
 }
 
 .filter-element:before {
@@ -293,7 +284,7 @@
     background-color: #e5e5e5;
 }
 
-.tt-suggestion, .dropdown-option {
+.tt-suggestion, .dropdown-option, .remove-filter {
 	color: #000;
 	font-weight: normal;
 	text-align: center;
@@ -305,10 +296,19 @@
 }
 
 input.search-element[type='text'] {
-	width: 300px;
+	width: 200px;
 }
 
 input.search-element[type='text'] + span + span.tt-dropdown-menu {
-	min-width: 300px;
+	min-width: 200px;
+}
+
+
+input.money.search-element[type='text'] {
+	width: 100px;
+}
+
+input.money.search-element[type='text'] + span + span.tt-dropdown-menu {
+	min-width: 200px;
 }
 >>>>>>> 82865d4ba2fbea81f6b94e18b05b566e11c8d7a1

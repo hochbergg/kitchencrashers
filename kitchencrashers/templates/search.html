@@ -1,327 +1,86 @@
-{% load static %}
-<!doctype html>
-<html>
-<head>
-	<title>I am a template</title>
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="{% static "css/typeahead.js-bootstrap.css" %}" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="{% static "js/typeahead.min.js" %}"></script>
-	<script src="{% static "js/hogan.js" %}"></script>
-	
-</head>
-<style>
-.btn-search {
-	background-color: #f7f7f7;
-}
-.search-label {
-	display: inline-block;
-	font-weight: bold;
-}
+{% extends "base.html" %}
+{% load dajaxice_templatetags %}
 
-.filters-row {
-	margin-bottom: 40px;
-}
+{% load staticfiles %}
+{% block more_scripts %}
+<link href="{% static 'css/typeahead.js-bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'css/search.css' %}" rel="stylesheet">
+<script src="{% static 'js/typeahead.min.js' %}"></script>
+<script src="{% static 'js/hogan.js' %}"></script>
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/search-interface.js' %}"></script>
+{% include 'search-clientside-templates.html' %}
 
-.profile-pic {
-	vertical-align: top;
-}
-
-.profile-pic-label {
-	display: inline-block;
-}
-
-.search-form {
-	text-align: center;
-}
-
-.filter-element {
-	display: inline-block;
-}
-
-.filter-element:before {
-	content:"\00a0"; /* This is a space to make sure things are spaced */
-}
-
-.filters,.add-filter {
-	display: inline-block;
-}
-
-.tt-hint {
-	display: none; /* No hints! */
-}
-
-.btn-search.tt-query {
-	background-color: #f7f7f7 !important; /* I need to fight with typeahead's styles :( */
-	vertical-align: middle !important;
-}
-
-.remove-filter-suggestion {
-	white-space: nowrap;
-	cursor: pointer;
-}
-
-.typeahead-seperator {
-    height: 1px;
-    margin: 9px 0;
-    background-color: #e5e5e5;
-}
-</style>
+<script src="{{STATIC_URL}}js/eventDisplay.js"></script>
+{% dajaxice_js_import %}
 
 <script>
-FilterElementType = function(def) {
-	this.name = def.name;
-	this.template = Hogan.compile(def.template,{delimiters: "[[ ]]"});
-	this.initial_value = def.initial_value;
-	this.default_text = def.default_text;
-	this.on_create = def.on_create;
-}
-
-FilterElementType.prototype.create = function(filter_group,$el) {
-	return new FilterElement(filter_group,this,this.initial_value,$el);
-}
-
-FilterElement = function(filter_group,type,value,$el) {
-	this.$el = $el;
-	this.type = type;
-	this.val = value;
-	this.filter_group = filter_group;
-	this.render();
-	this.type.on_create(this);
-}
-
-FilterElement.prototype.render = function() {
-	this.$el.html(this.type.template.render(this.val));
-}
-
-FilterElement.prototype.delete = function() {
-	this.$el.remove();
-	this.filter_group.remove_element(this);
-}
-
-FilterGroup = function($el,add_filter_template) {
-	this.$el = $el;
-	this.filters = []
-	this.filter_types = {}
-	this.add_filter_template = Hogan.compile(add_filter_template,{delimiters: "[[ ]]"});
-
-	var me = this; // For the closure
-	this.$el.on("click",".add-filter-link",function(e) {
-		me.create($(this).data("filter"));
-		e.stopPropagation();
-		return false;
-	});
-
-	this.update_left_dropdown();
-}
-
-FilterGroup.prototype.remove_element = function(element) {
-	index = this.filters.indexOf(element);
-
-	if (index != -1) {
-		this.filters.splice(index,1)
-	}
-
-	this.update_left_dropdown();
-}
-
-FilterGroup.prototype.add_type = function(type) {
-	this.filter_types[type.name] = type;
-
-	this.update_left_dropdown();
-}
-
-FilterGroup.prototype.create = function(type_name) {
-	type = this.filter_types[type_name];
-	$new_el = $("<div></div>");
-	$new_el.addClass("filter-element");
-	this.$el.find(".filters").append($new_el);
-
-	this.filters.push(type.create(this,$new_el));
-	this.update_left_dropdown();
-}
-
-FilterGroup.prototype.update_left_dropdown = function() {
-	left = this.find_left_filters();
-
-	out = []
-
-	for (var name in left) {
-		out.push({name: name,
-			text: left[name].default_text});
-	}
-
-	if (out.length > 0) {
-		this.$el.find(".add-filter").show();
-		this.$el.find(".add-filter").html(this.add_filter_template.render({filters: out}));
-	} else {
-		this.$el.find(".add-filter").hide();
-	}
-		
-}
-
-FilterGroup.prototype.find_left_filters = function() {
-	left = {}
-	for(var name in this.filter_types) {
-		left[name] = this.filter_types[name];
-	}
-
-	for(var i=0;i<this.filters.length;i++) {
-		delete left[this.filters[i].type.name];
-	}
-
-	return left
-}
-
-FilterGroup.prototype.to_query = function() {
-	// IMPLEMENT THIS
-}
-
-function initTypeahead(filter_element,$el,opts) {
-	// Add the "Remove filter" footer
-	opts.footer = "<div class='typeahead-seperator'></div><div class='tt-suggestion remove-filter-suggestion'><p>Remove Filter</p></div>";
-
-	// Init the typeahead on our requested element
-	$el.typeahead(opts);
-	$el.data("ttView").setQuery($el.val()); // Force it to initialize, so it'll show options on click
-
-	// If we empty the textboxt, remove the element
-	$el.on("change",function() {
-		if ($(this).val() === "") {
-			filter_element.delete();
-		}
-	});
-
-	// Events are registered on the parent element so we wont have to be dependant on typeahead.js's structure
-	filter_element.$el.on("mouseleave",".remove-filter-suggestion",function() {
-		$(this).removeClass("tt-is-under-cursor"); // We want to get the magical mouseover behaviour too
-	});
-
-	filter_element.$el.on("click",".remove-filter-suggestion",function() {
-		filter_element.delete();
-	});
-}
-
-function initDropdown(filter_element,$el,with_remove) {
-	with_remove = typeof with_remove !== 'undefined' ? with_remove : true;
-
-	if ( with_remove ) {
-		remove_opts = '<li class="divider"></li><li><a href="#" class="remove-filter">Remove Filter</a></li>'
-
-		$el.find(".dropdown-menu").append(remove_opts);
-
-		$el.on("click",".remove-filter",function() {
-			filter_element.delete();
-		});
-	}
-
-	$el.on("click",".dropdown-option",function() {
-		filter_element.val = {caption: $(this).text()};
-		filter_element.render();
-	});
-}
-
 $(function() {
-	location_filter = new FilterElementType({
-		name: "location",
-		template: $("#location-filter-template")[0].innerHTML,
-		initial_value: {caption: "Tel Aviv"},
-		default_text: "at Tel Aviv",
-		on_create: function(filter_element) {
-			initTypeahead(filter_element,filter_element.$el.find(".location-search"),{
-				local: ["Tel Aviv","Jerusalem","Petah Tikvah"]
-			});
-		}
-	});
+	var searchResultsTemplate = Hogan.compile($("#search-results-template")[0].innerHTML,{delimiters: "[[ ]]"});
 
-	category_filter = new FilterElementType({
-		name: "category",
-		template: $("#category-filter-template")[0].innerHTML,
-		initial_value: {caption: "Italian Food"},
-		default_text: "only Italian Food",
-		on_create: function(filter_element) {
-			initTypeahead(filter_element,filter_element.$el.find(".category-search"),{
-				local: ["Italian Food","Asado","Chinese Food","Sushi"]
-			});
-		}
-	});
+	fg = new FilterGroup($("#search-form"), $("#add-filter-template")[0].innerHTML,
+        function(fg) {
+            Dajaxice.kitchencrashers.main.views.search_api(
+            	function(data) {
+            		events = data.events;
+            		
+            		groups = [];
+            		curr = [];
+            		for(var i in events) {
+            			if ((i % 3 == 0) && (curr.length > 0)) {
+            				groups.push(curr);
+            				curr = [];
+            			}
 
-	my_job_filter = new FilterElementType({
-		name: "my_job",
-		template: $("#my-job-filter-template")[0].innerHTML,
-		initial_value: {caption: "Cook"},
-		default_text: "I want to Cook",
-		on_create: function(filter_element) {
-			initDropdown(filter_element,filter_element.$el,false);
-		}
-	});
+            			var e = events[i].fields;
+            			e.name = e.name.slice(0,15);
+            			if (e.picture.length == 0) { e.picture = undefined; }
+            			curr.push(e);
+            		}
 
-	meal_filter = new FilterElementType({
-		name: "meal",
-		template: $("#meal-filter-template")[0].innerHTML,
-		initial_value: {caption: "Dinner"},
-		default_text: "for Dinner",
-		on_create: function(filter_element) {
-			initDropdown(filter_element,filter_element.$el);
-		}
-	});
+            		if ( curr.length > 0 ) {
+            			groups.push(curr);
+            		}
 
-	price_filter = new FilterElementType({
-		name: "price",
-		template: $("#price-filter-template")[0].innerHTML,
-		initial_value: {min: 50, max: 100},
-		default_text: "for 50 to 100 NIS",
-		on_create: function(filter_element) {
-			initTypeahead(filter_element,filter_element.$el.find(".money-from"),{local: []});
-			initTypeahead(filter_element,filter_element.$el.find(".money-to"),{local: []});
-		}
-	});
+            		$("#search-results").empty();
+            		$("#search-results").html(searchResultsTemplate.render({groups:groups}));
+            		initializeEventHover();
+            	},
+            	{data:JSON.stringify(fg.toQuery())}
+            );
+        }
+    );
+    fg.add_type(location_filter);
+    fg.add_type(category_filter);
+    fg.add_type(my_job_filter);
+    fg.add_type(price_filter);
+    fg.add_type(meal_filter);
 
-	fg = new FilterGroup($("#search-form"), $("#add-filter-template")[0].innerHTML);
-	fg.add_type(location_filter);
-	fg.add_type(category_filter);
-	fg.add_type(my_job_filter);
-	fg.add_type(price_filter);
-	fg.add_type(meal_filter);
-
-	fg.create("my_job");
-	fg.create("category");
+    fg.create("my_job");
+    fg.create("location");
+    fg.create("category");
 });
-
 </script>
-<body>
-	<div class="container">
-		<div class="row filters-row">
-			<div class="col-md-12">
-				<form class="search-form" id="search-form">
-				<div class="filters">
-				</div>
-				<div class="add-filter">
-				</div>
-				</form>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<img src="{% static 'a.jpg' %}">
-				<h3>Italian night to the face</h3>
-				<img class="profile-pic" src="http://profile.ak.fbcdn.net/hprofile-ak-prn2/1117507_6006886_2035726836_q.jpg">
-				<div class="profile-pic-label">Host: Watsup<br>*****</div>
-				
-			</div>
-			<div class="col-md-4">
-				<img src="{% static 'a.jpg' %}">
-				<h3>Italian night to the face</h3>
-				<img class="profile-pic" src="http://profile.ak.fbcdn.net/hprofile-ak-prn2/1117507_6006886_2035726836_q.jpg">
-				<div class="profile-pic-label">Host: Watsup<br>*****</div>
-			</div>
-			<div class="col-md-4">
-				<img src="{% static 'a.jpg' %}">
-				<h3>Italian night to the face</h3>
-				<img class="profile-pic" src="http://profile.ak.fbcdn.net/hprofile-ak-prn2/1117507_6006886_2035726836_q.jpg">
-				<div class="profile-pic-label">Host: Watsup<br>*****</div>
-			</div>
-		</div>
-</body>
-</html>
+{% endblock %}
+
+{% block page_body %}
+<div class="row" id="search-row">
+    <form class="search-form" target='' id="search-form">
+        <div class="filters">
+        </div>
+        <button type='submit' class='btn btn-primary'>Crash</button>
+        <div class="add-filter">
+        </div>
+    </form>
+
+</div>
+
+<div class="container" id="search-results">
+</div>
+
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button>
+
+{% include 'addEventModal.html' %} {% endblock %}

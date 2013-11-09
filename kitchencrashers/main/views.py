@@ -7,6 +7,9 @@ import django
 from django.contrib.auth.decorators import login_required
 from forms.event_form import EventForm
 from models import RsvpOptions
+from django.utils import simplejson
+from dajaxice.decorators import dajaxice_register
+from django.core import serializers
 
 
 
@@ -64,3 +67,34 @@ def showEvent(request, eventID):
     event.cleaners = event.participants.filter(rsvp=RsvpOptions().CLEANER).count()
     event.per_person = event.budget / (event.participants.count() + 1)
     return render(request, "ShowEvent.html", {'event': event})
+
+def MyEvents(request):
+    return render(request, "MyEvents.html")
+    
+@dajaxice_register
+def search_api(request,data):
+    filter = simplejson.loads(data)
+
+    q = Event.objects.all()
+    for k,v in filter.iteritems():
+        if k == 'location':
+            q = q.filter(city=v[0])
+        elif k == 'category':
+            q = q.filter(category=v[0])
+
+    all_objects = list(q)
+    data = simplejson.loads(serializers.serialize('json', all_objects))
+    return simplejson.dumps({'events':data, 'success':True})\
+
+@login_required
+def addParticipantToEvent(request ,eventID):
+    event = Event.objects.get(pk=eventID)
+    user = models.KitchenUser.objects.get(id=request.user.id)
+    current_participants = event.participants
+    if current_participants.filter(user=request.user).count() ==0:
+        participant = models.EventParticipant(event = event, user = user, \
+            rsvp = models.RsvpOptions().get_rsvp_by_id(int(event_form.cleaned_data['rsvp'])))
+        participant.save()
+    events = Event.objects.all()
+    form = EventForm()
+    return render(request,"index.html",{'events':events, 'form':form})

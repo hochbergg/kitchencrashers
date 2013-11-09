@@ -1,6 +1,8 @@
+{% load staticfiles %}
+
 <script type="text/html" id="location-filter-template">
 <div class="search-label"> at </div>
-<input type="text" class="location-search btn btn-default btn-search search-element" name="location" value="[[ caption ]]">
+<input type="text" class="location-search btn btn-default btn-search search-element" value="[[ caption ]]">
 </script>
 
 <script type="text/html" id="category-filter-template">
@@ -32,9 +34,9 @@
 
 <script type="text/html" id="price-filter-template">
 <div class="search-label"> for </div>
-<input type="text" class="btn btn-default btn-search money-from search-element" value="[[ min ]]" size="4">
+<input type="text" class="btn btn-default btn-search money-from search-element money" value="[[ min ]]" size="4">
 <div class="search-label"> to </div>
-<input type="text" class="btn btn-default btn-search money-to search-element" value="[[ max ]]" size="4">
+<input type="text" class="btn btn-default btn-search money-to search-element money" value="[[ max ]]" size="4">
 <div class="search-label"> NIS </div>&nbsp;
 </script>
 
@@ -48,4 +50,44 @@
         [[/filters]]
     </ul>
 </div>
+</script>
+
+<script type="text/html" id="dropdown-filter-template">
+<div class="btn-group">
+    <button type="button" class="btn btn-default btn-search dropdown-toggle search-element" data-toggle="dropdown"> [[ caption ]] <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+    </ul>
+</div>
+</script>
+
+<script type="text/html" id="search-results-template">
+[[#groups]]
+    <div class="row">
+    <div class="col-md-1"></div>
+    [[#.]]
+        <div class="col-md-offset-1 col-md-2 event-box">
+            <div class="event-pic-container">
+                [[#picture]]<img class="event-pic" src="[[.]]">[[/picture]]
+                [[^picture]]<img class="event-pic" src="{% static 'kitchen_crashers_logo.png' %}">[[/picture]]
+                <span class="event-extra-details">
+                    <img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
+                    <span class="event-details-text float-left">[[num_cooks]]</span>
+                    <img class="event-details-pic float-left" src="{% static 'dish_white.png' %}">
+                    <span class="event-details-text float-left">[[num_cleaners]]</span>
+                    <img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
+                    <img class="event-details-pic float-right" src="{% static 'dish_white.png' %}">
+                </span>
+            </div>
+            <hr class="event-hr">
+            <div class="event-name">[[name]]</div>
+            <div class="event-host">
+                <img class="event-host-pic" src="{% static 'b.jpg' %}">
+                <div class="event-host-name">
+                    Host: [[organizer]]
+                </div>
+            </div>
+        </div>
+    [[/.]]
+    </div>
+[[/groups]]
 </script>

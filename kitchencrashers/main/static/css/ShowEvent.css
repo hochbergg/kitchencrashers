@@ -1,3 +1,8 @@
+#event-description-all
+{
+	margin-top:40px;
+}
+
 #event-photos-container
 {
 
@@ -21,12 +26,13 @@
 
 #event-details-ticket
 {
-	width: 80%;
-	padding-right: 50;
+	width: 100%;
 }
 
 .event-details-ticket-boxes
 {
+	margin-left:5px;
+	margin-right:5px;
 	height: 80px;
 }
 
@@ -46,7 +52,7 @@
 #ticket-div-1
 {
 	float: left;
-	width: 20%;
+	width: 16%;
 }
 
 #ticket-div-1-1
@@ -74,6 +80,7 @@
 
 #ticket-div-1-1-1-2
 {
+	text-align: center;	
 	float: left;
 	width: 50%;
 	height: 100%;
@@ -81,9 +88,15 @@
 }
 
 
-#cookers-counter-text
+.counter-text
 {
-	font-size:12px;
+
+	font-size:18px;
+}
+
+.counter-title-text
+{
+	font-size: 12px;
 }
 
 
@@ -116,15 +129,11 @@
 
 #ticket-div-1-2-1-2
 {
+	text-align: center;
 	float: left;
 	width: 50%;
 	height: 100%;
 	background-color: white;
-}
-
-#cleaners-counter-text
-{
-	font-size: 18px
 }
 
 #ticket-div-1-2-2
@@ -140,7 +149,9 @@
 
 #ticket-div-2
 {
-	width: 10%;
+	margin-left: -4px;
+	margin-right: -4px;
+	width: 7.5%;
 	float: left;
 	background-color: white;
 }
@@ -153,7 +164,8 @@
 
 #ticket-div-3
 {
-	width: 20%;
+	text-align: center;
+	width: 14%;
 	float: left;
 }
 
@@ -180,6 +192,7 @@
 	font-size: 30px;
 }
 
+
 #ticket-div-3-3
 {
 	height: 20%;
@@ -193,8 +206,10 @@
 
 #ticket-div-4
 {
-	width: 50%;;
+	width: 54%;
 	float:left;
+	padding-top: 4px;
+	padding-left:10px;
 	background-color: white;
 	border-left-style: solid;
 	border-left-width: 1;
@@ -202,8 +217,10 @@
 
 #event-name-text
 {
-	line-height: 18px;
-	font-size: 19px;
+	line-height: 24px;
+	font-size: 26px;
+	font-family: monospace;
+	word-wrap:break-word;
 }
 
 .event-details-secondary-title
