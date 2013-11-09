@@ -67,3 +67,10 @@ def showEvent(request, eventID):
     event.cleaners = event.participants.filter(rsvp=RsvpOptions().CLEANER).count()
     event.per_person = event.budget / (event.participants.count() + 1)
     return render(request, "ShowEvent.html", {'event': event})
+
+def MyEvents(request):
+    events = Event.objects.all()
+    form = EventForm()
+    return render(request,"MyEvents.html",{'events':events, 'form':form})
+    # return render(request, "MyEvents.html")
+    
