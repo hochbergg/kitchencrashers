@@ -67,3 +67,17 @@ def showEvent(request, eventID):
     event.cleaners = event.participants.filter(rsvp=RsvpOptions().CLEANER).count()
     event.per_person = event.budget / (event.participants.count() + 1)
     return render(request, "ShowEvent.html", {'event': event})
+
+
+@login_required
+def addParticipantToEvent(request ,eventID):
+    event = Event.objects.get(pk=eventID)
+    user = models.KitchenUser.objects.get(id=request.user.id)
+    current_participants = event.participants
+    if current_participants.filter(user=request.user).count() ==0:
+        participant = models.EventParticipant(event = event, user = user, \
+            rsvp = models.RsvpOptions().get_rsvp_by_id(int(event_form.cleaned_data['rsvp'])))
+        participant.save()
+    events = Event.objects.all()
+    form = EventForm()
+    return render(request,"index.html",{'events':events, 'form':form})
