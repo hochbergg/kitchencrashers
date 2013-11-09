@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
 {% block more_scripts %}
+<link href="{% static "css/typeahead.js-bootstrap.css" %}" rel="stylesheet">
+<script src="{% static "js/typeahead.min.js" %}"></script>
+<script src="{% static "js/hogan.js" %}"></script>
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/search-interface.js' %}"></script>
+{% include 'search-clientside-templates.html' %}
+
 <script src="{{STATIC_URL}}js/eventDisplay.js"></script>
 {% endblock %}
 
@@ -12,31 +18,13 @@
 			<h1>CRASH A KITCHEN</h1>
 			<h3>Hungry? Join a meal near you and meet new people!</h3>
 		</div>
-		<form class="well form-inline" role="form">
-			<div class="form-group">
-				<select class="form-control">
-					<option>I want to cook</option>
-					<option>I want to clean</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Where?">
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="What style?">
-			</div>
-			<div class="form-group">
-				<select class="form-control" placeholder="Price range">
-					<option>Less than 15$</option>
-					<option>15-30$</option>
-					<option>30-100$</option>
-					<option>More than 100$</option>
-				</select>
-			</div>
-			<div class="form-group" id="sign-in-button-group">
-				<button type="submit" class="btn btn-default">CRASH</button>
-			</div>
-		</form>
+		<form class="search-form" id="search-form">
+				<div class="filters">
+				</div>
+				<div class="add-filter">
+				</div>
+				</form>
+		
 	</div>
 
 <div class="container">
@@ -135,14 +123,12 @@
 		style="top: 43%; left: 56%; width: 34%; font-size: 11px; font-weight: bold;">
 		{{event.date|date:"l"|slice:"3"}} at {{event.date|date:"P"}}</span> <img
 		src="{% static 'hat_on_ticket.png' %}" class="on-ticket-element"
-		style="top: 66%; left: 56.5%; width: 4%;"> <span
-		class="on-ticket-element"
+		style="top: 66%; left: 56.5%; width: 4%;"> <span class="on-ticket-element"
 		style="top: 64%; left: 61.5%; font-size: 14px">{{event.num_cooks}}</span>
 
 		<img src="{% static 'bubbles_on_ticket.png' %}"
 		class="on-ticket-element"
-		style="top: 65%; left: 68.5%; width: 4%;"> <span
-		class="on-ticket-element"
+		style="top: 65%; left: 68.5%; width: 4%;"> <span class="on-ticket-element"
 		style="top: 64%; left: 74%; font-size: 14px">{{event.num_cleaners}}</span>
 		<img src="{% static 'map_icon.png' %}" class="on-ticket-element"
 		style="top: 65%; left: 80%; width: 3%; height: 12%;"> <img
