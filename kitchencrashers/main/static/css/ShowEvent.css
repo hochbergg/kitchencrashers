@@ -1,18 +1,411 @@
-#event-main-picture
+#event-photos-container
 {
-	width:200px;
-	height:200px;
+
+
 }
 
-#num-of-cooks
+#event-main-picture
+{
+	width:300px;
+	height:200px;
+	float: right;
+}
+
+#event-details-container
+{
+	border-left-style: solid;
+	border-left-width: 1;
+	border-left-color: gray;
+}
+
+
+#event-details-ticket
+{
+	width: 80%;
+	padding-right: 50;
+}
+
+.event-details-ticket-boxes
+{
+	height: 80px;
+}
+
+.ticket-logos{
+	height: 100%;
+	width: 100%;
+}
+
+.ticket-texts{
+	font-weight: bold;
+	color: black;
+
+	font-decoration:bold;
+}
+
+
+#ticket-div-1
+{
+	float: left;
+	width: 20%;
+}
+
+#ticket-div-1-1
+{
+	height: 50%;
+}
+
+#ticket-div-1-1-1
+{
+	height: 50%;
+}
+
+#ticket-div-1-1-1-1
+{
+	float: left;
+	width: 50%;
+	height: 100%;
+	background-color: white;
+}
+
+#cookers-logo
+{
+
+}
+
+#ticket-div-1-1-1-2
+{
+	float: left;
+	width: 50%;
+	height: 100%;
+	background-color: white;
+}
+
+
+#cookers-counter-text
+{
+	font-size:12px;
+}
+
+
+#ticket-div-1-1-2
+{
+	height: 50%;
+	background-color: white;
+}
+
+
+
+#ticket-div-1-2
+{
+	height: 50%;
+
+}
+
+#ticket-div-1-2-1
+{
+	height: 50%;
+}
+
+#ticket-div-1-2-1-1
+{
+	float: left;
+	width: 50%;
+	height: 100%;
+	background-color: white;
+}
+
+#ticket-div-1-2-1-2
+{
+	float: left;
+	width: 50%;
+	height: 100%;
+	background-color: white;
+}
+
+#cleaners-counter-text
+{
+	font-size: 18px
+}
+
+#ticket-div-1-2-2
+{
+	height: 50%;
+	background-color: white;
+}
+
+#cleaners-title-text
+{
+	font-size: 8px
+}
+
+#ticket-div-2
+{
+	width: 10%;
+	float: left;
+	background-color: white;
+}
+
+#ticket-logo-line-1
+{
+	width: 100%;
+	height: 100%;
+}
+
+#ticket-div-3
+{
+	width: 20%;
+	float: left;
+}
+
+#ticket-div-3-1
+{
+	height: 20%;
+	background-color: white;
+}
+
+#event-date-text-month
+{ 
+	font-size: 11px; 
+	font-weight: bold;
+}
+
+#ticket-div-3-2
+{
+	height: 60%;
+	background-color: white;
+}
+
+#event-date-text-day
+{
+	font-size: 30px;
+}
+
+#ticket-div-3-3
+{
+	height: 20%;
+	background-color: white;
+}
+
+#event-location-text
+{
+	font-size: 11px;
+}
+
+#ticket-div-4
+{
+	width: 50%;;
+	float:left;
+	background-color: white;
+	border-left-style: solid;
+	border-left-width: 1;
+}
+
+#event-name-text
+{
+	line-height: 18px;
+	font-size: 19px;
+}
+
+.event-details-secondary-title
+{
+	font-weight: bold;
+}
+
+#publishing-user
+{
+	margin-top: 20;
+}
+
+
+#user-picture
+{
+    width: 15;
+    height: 19;
+}
+
+#event-details-full-text
+{
+
+}
+
+#budget-details-total
+{
+	margin-top: 20;
+
+}
+#budget-details-per-person
+{
+	margin-top:2;
+}
+
+
+#event-tags
+{
+	margin-top: 20
+}
+/* Ticket styling  */
+
+.top-text-in-ticket
+{
+    top: 21%;
+}
+
+#cookers-counter-text-old
 {
 	top: 22%;
 	left: 17%;
 	
 }
 
-.small-not-highlighted-text
+#under-stroke-for-cooks
 {
-	font-size:20px;
-	font-decoration:bold;
+    background-color: black;
+    top: 60%;
+    left: 7%;
+    height: 0.4%;
+    width: 18%;
+}
+
+
+
+
+/* element by element */
+
+#old-ticket-container
+{
+	width: 100%; 
+	display: block; 
+	position: absolute; 
+	top: -3%; 
+	bottom: -25%; 
+	right: 0%; 
+	left: 0%
+}
+
+#cookers-logo-old
+{
+	top: 23%;
+	left: 10%;
+	height: 15%
+}
+
+#text-cooks-old
+{
+	top: 38%; 
+	left: 10%;
+}
+
+#under-stroke-for-cooks
+{
+
+}
+
+#user-picture-old
+{
+    top: 69%;
+    left: 8%;
+    width: 3.5%;
+    height: 8%
+}
+
+#user-name-short
+{
+	top: 69%; 
+	left: 12%; 
+	font-size: 11px
+}
+
+#ticket-logo-line-1-old
+{
+	top: 20%; 
+	left: 30%;
+	width: 4.5%;
+	height: 60%;
+}
+
+#event-date-text-month-old
+{
+	left: 40%; 
+	font-size: 11px; 
+	font-weight: bold;
+}
+
+#event-date-text-day-old
+{
+	top: 24%; 
+	left: 36%; 
+	font-size: 44px;
+}
+
+#event-location-text-old
+{
+	top: 68%; left: 37%; font-size: 11px;
+}
+
+#ticket-logo-box-1
+{
+	background-color: gray; 
+	top: 20%; 
+	left: 52.5%; 
+	height: 61%; 
+	width: 0.4%;
+}
+
+#ticket-logo-box-2
+{
+	background-color: gray; 
+	top: 58%; 
+	left: 52.5%; 
+	height: 0.6%; 
+	width: 42%;
+}
+
+#event-name-text-old
+{
+	left: 56%; 
+	width: 40%; 
+	font-size: 13px; 
+	font-weight: bold; 
+	line-height: 14px;
+}
+
+#event-date-text-exact-time
+{
+	top: 43%; 
+	left: 56%; 
+	width: 34%; 
+	font-size: 11px; 
+	font-weight: bold;
+}
+
+#cleaners-logo-old
+{
+	top: 65%; 
+	left: 68.5%; 
+	width: 4%;
+
+}
+
+#cleaners-counter-text-old
+{
+	top: 64%; 
+	left: 74%; 
+	font-size: 14px
+}
+
+
+#map-pointer-logo
+{
+	top: 65%; 
+	left: 80%;
+	width: 3%; 
+	height: 12%;
+}
+
+#clock-logo
+{
+	top: 66%; 
+	left: 86%; 
+	width: 5%; 
+	height: 11%;
 }
